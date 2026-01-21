@@ -1,10 +1,6 @@
 package com.ru.mag.db.jdbc.util;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class DBUtil {
 
@@ -12,11 +8,12 @@ public class DBUtil {
     // Cached PreparedStatements
     // -----------------------------
     private PreparedStatement createCompany = null;
-    private PreparedStatement getCompanyById = null;
-    private PreparedStatement updateCompanyPhone = null;
-    private PreparedStatement deleteCompany = null;
 
     private PreparedStatement getAgents = null;
+    private PreparedStatement getAgentById = null;
+    private PreparedStatement updateAgent = null;
+    private PreparedStatement deleteAgent = null;
+
 
     private PreparedStatement createProduct = null;
     private PreparedStatement getProductById = null;
@@ -55,13 +52,19 @@ public class DBUtil {
     private static final String SELECT_AGENT_QUERY =
             "SELECT * FROM AGENT";
 
+    public static final String SELECT_AGENT_BY_ID_QUERY =
+            "SELECT * FROM Agent where person_id = ?";
+
+    public static final String INSERT_AGENT_QUERY =
+            "INSERT INTO Agent(salary, hireDate) VALUES(?,?)";
+
+    public static final String UPDATE_AGENT_SALARY_QUERY =
+            "UPDATE Agent Set salary = ? where person_id = ?";
+
+    public static final String DELETE_AGENT_QUERY =
+            "DELETE FROM Agent WHERE person_id = ?";
 
 
-    private static final String UPDATE_COMPANY_PHONE_QUERY =
-            "UPDATE Company SET phone = ? WHERE company_id = ?";
-
-    private static final String DELETE_COMPANY_QUERY =
-            "DELETE FROM Company WHERE company_id = ?";
 
     // PRODUCT CRUD
     private static final String INSERT_PRODUCT_QUERY =
@@ -89,6 +92,8 @@ public class DBUtil {
     private static final String INSERT_PRODUCT_PRICE_QUERY =
             "INSERT INTO Product_Price(price_id, product_id, valid_from, valid_to, price) " +
                     "VALUES(?, ?, ?, ?, ?)";
+
+
 
     // Current price where now is within [valid_from, valid_to] OR valid_to is NULL
     private static final String SELECT_CURRENT_PRICE_QUERY =
@@ -178,26 +183,28 @@ public class DBUtil {
         return getAgents;
     }
 
-    private PreparedStatement getCompanyByIdStmt() throws SQLException {
-        if (getCompanyById == null) {
-            getCompanyById = getConnection().prepareStatement(SELECT_COMPANY_BY_ID_QUERY);
+    private PreparedStatement getAgentById(int id) throws SQLException {
+        if(getAgentById == null){
+            getAgentById = getConnection().prepareStatement(SELECT_AGENT_BY_ID_QUERY);
         }
-        return getCompanyById;
+        return getAgentById;
     }
 
-    private PreparedStatement getUpdateCompanyPhoneStmt() throws SQLException {
-        if (updateCompanyPhone == null) {
-            updateCompanyPhone = getConnection().prepareStatement(UPDATE_COMPANY_PHONE_QUERY);
+    private PreparedStatement updateAgentSalary() throws SQLException {
+        if(updateAgent == null){
+            updateAgent = getConnection().prepareStatement(UPDATE_AGENT_SALARY_QUERY);
         }
-        return updateCompanyPhone;
+        return updateAgent;
     }
 
-    private PreparedStatement getDeleteCompanyStmt() throws SQLException {
-        if (deleteCompany == null) {
-            deleteCompany = getConnection().prepareStatement(DELETE_COMPANY_QUERY);
+    private PreparedStatement deleteAgent() throws SQLException {
+        if(deleteAgent == null){
+            deleteAgent = getConnection().prepareStatement(DELETE_AGENT_QUERY);
         }
-        return deleteCompany;
+        return deleteAgent;
     }
+
+
 
     private PreparedStatement getCreateProductStmt() throws SQLException {
         if (createProduct == null) {
@@ -294,27 +301,36 @@ public class DBUtil {
     // -----------------------------
     // CRUD METHODS: COMPANY
     // -----------------------------
-    public int createCompany(
-            int companyId, String name, String eik,
-            String country, String city, String streetAddress, String postalCode,
-            String phone
-    ) {
-        try {
-            PreparedStatement stmt = getCreateCompanyStmt();
-            stmt.setInt(1, companyId);
-            stmt.setString(2, name);
-            stmt.setString(3, eik);
-            stmt.setString(4, country);
-            stmt.setString(5, city);
-            stmt.setString(6, streetAddress);
-            stmt.setString(7, postalCode);
-            stmt.setString(8, phone);
-            return stmt.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return 0;
-        }
-    }
+
+    /**
+     * Never cache PreparedStatement fields
+     * Always:
+     * create it
+     * use it
+     * close it (via try-with-resources)
+     *
+     * BETTER PRACTICE!!
+     * public List<Agent> getAllAgents() {
+     *     List<Agent> agents = new ArrayList<>();
+     *
+     *     try (PreparedStatement stmt =
+     *              getConnection().prepareStatement(SELECT_AGENT_QUERY);
+     *          ResultSet rs = stmt.executeQuery()) {
+     *
+     *         while (rs.next()) {
+     *             agents.add(new Agent(
+     *                 rs.getInt("person_id"),
+     *                 rs.getDouble("salary"),
+     *                 rs.getDate("hireDate")
+     *             ));
+     *         }
+     *     } catch (SQLException e) {
+     *         e.printStackTrace();
+     *     }
+     *
+     *     return agents;
+     * }
+     * */
 
     public ResultSet getAllAgentsCommand(){
         try{
@@ -327,39 +343,46 @@ public class DBUtil {
           }
     }
 
-    public ResultSet getCompanyById(int companyId) {
-        try {
-            PreparedStatement stmt = getCompanyByIdStmt();
-            stmt.setInt(1, companyId);
+    public ResultSet getAgentByIdCommand(int id){
+        try{
+            PreparedStatement stmt = getAgentById(id);
             return stmt.executeQuery();
-        } catch (SQLException e) {
+        }
+        catch(Exception e){
             e.printStackTrace();
             return null;
         }
     }
 
-    public int updateCompanyPhone(int companyId, String newPhone) {
-        try {
-            PreparedStatement stmt = getUpdateCompanyPhoneStmt();
-            stmt.setString(1, newPhone);
-            stmt.setInt(2, companyId);
+    //BETTER PRACTICE CODE -> ALWAYS CLOSE CONNECTION
+    public int updateAgentSalaryCommand(int id, double salary) {
+
+        try (PreparedStatement stmt =
+                     getConnection().prepareStatement(UPDATE_AGENT_SALARY_QUERY)) {
+
+            stmt.setDouble(1, salary);
+            stmt.setInt(2, id);
+
             return stmt.executeUpdate();
+
         } catch (SQLException e) {
             e.printStackTrace();
             return 0;
         }
     }
 
-    public int deleteCompany(int companyId) {
-        try {
-            PreparedStatement stmt = getDeleteCompanyStmt();
-            stmt.setInt(1, companyId);
+    public int deleteAgent(int id){
+        try{
+            PreparedStatement stmt = deleteAgent();
+            stmt.setInt(1, id);
             return stmt.executeUpdate();
-        } catch (SQLException e) {
+        }
+        catch(Exception e){
             e.printStackTrace();
             return 0;
         }
     }
+
 
     // -----------------------------
     // CRUD METHODS: PRODUCT
