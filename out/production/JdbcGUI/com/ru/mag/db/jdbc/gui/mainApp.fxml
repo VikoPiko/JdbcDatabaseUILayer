@@ -3,46 +3,32 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<GridPane alignment="center"
-          hgap="10"
-          vgap="10"
-          prefHeight="350.0"
-          prefWidth="350.0"
-          xmlns="http://javafx.com/javafx/17.0.12"
-          xmlns:fx="http://javafx.com/fxml/1"
-          fx:controller="com.ru.mag.db.jdbc.gui.MainController">
+<GridPane alignment="center" hgap="10" prefHeight="350.0" prefWidth="350.0" vgap="10" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ru.mag.db.jdbc.gui.MainController">
 
     <columnConstraints>
-        <ColumnConstraints halignment="CENTER"/>
+        <ColumnConstraints halignment="CENTER" />
     </columnConstraints>
 
     <rowConstraints>
-        <RowConstraints prefHeight="40"/>
-        <RowConstraints prefHeight="40"/>
-        <RowConstraints prefHeight="40"/>
-        <RowConstraints prefHeight="40"/>
-        <RowConstraints prefHeight="40"/>
+        <RowConstraints prefHeight="40" />
+        <RowConstraints prefHeight="40" />
+        <RowConstraints prefHeight="40" />
+        <RowConstraints prefHeight="40" />
+        <RowConstraints prefHeight="40" />
     </rowConstraints>
 
     <children>
-        <Button text="Show all products"
-                onAction="#showAllProducts"
-                GridPane.rowIndex="0"/>
+        <Button onAction="#showAllProducts" text="Show all products" GridPane.rowIndex="0" />
 
-        <Button text="Edit product"
-                onAction="#editProduct"
-                GridPane.rowIndex="1"/>
+        <Button onAction="#editProduct" text="Edit product" GridPane.rowIndex="1" />
 
-        <Button text="Search product"
-                onAction="#searchProduct"
-                GridPane.rowIndex="2"/>
+        <Button onAction="#searchProduct" text="Search product" GridPane.rowIndex="2" />
 
 <!--        <Button text="Show manufacturers"-->
 <!--                onAction="#showManufacturers"-->
 <!--                GridPane.rowIndex="3"/>-->
 
-        <Button text="Edit manufacturer"
-                onAction="#editManufacturer"
-                GridPane.rowIndex="4"/>
+        <Button onAction="#editManufacturer" text="Edit manufacturer" GridPane.rowIndex="4" />
+      <Button mnemonicParsing="false" onAction="#showAllAgents" text="Get Agents" GridPane.rowIndex="3" />
     </children>
 </GridPane>

@@ -41,6 +41,27 @@ public class MainController {
         }
     }
 
+    public void showAllAgents(ActionEvent event) throws IOException {
+        try{
+            ResultSet rs = DBUtil.getInstance().getAllAgentsCommand();
+
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("TableDialog.fxml"));
+            Parent tableParent = fxmlLoader.load();
+
+            TableController tableController = fxmlLoader.getController();
+            tableController.setTableResultset(rs, "All agents");
+
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Agents");
+            stage.setScene(new Scene(tableParent));
+            stage.show();
+
+        } catch (Exception e){
+            showError(e.getMessage());
+        }
+    }
+
     // -----------------------------
     // SEARCH PRODUCT (example by ID)
     // -----------------------------

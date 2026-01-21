@@ -16,6 +16,8 @@ public class DBUtil {
     private PreparedStatement updateCompanyPhone = null;
     private PreparedStatement deleteCompany = null;
 
+    private PreparedStatement getAgents = null;
+
     private PreparedStatement createProduct = null;
     private PreparedStatement getProductById = null;
     private PreparedStatement updateProduct = null;
@@ -47,6 +49,13 @@ public class DBUtil {
                     "       c.address.street_address AS street_address, c.address.postal_code AS postal_code, " +
                     "       c.phone " +
                     "FROM Company c WHERE c.company_id = ?";
+
+
+
+    private static final String SELECT_AGENT_QUERY =
+            "SELECT * FROM AGENT";
+
+
 
     private static final String UPDATE_COMPANY_PHONE_QUERY =
             "UPDATE Company SET phone = ? WHERE company_id = ?";
@@ -142,7 +151,7 @@ public class DBUtil {
 //                DriverManager.registerDriver(new oracle.jdbc.OracleDriver());
                 cachedConnection = DriverManager.getConnection(
                         "jdbc:oracle:thin:@localhost:1521:xe",
-                        "AptekaKursova",
+                        "coursework",
                         "123456"
                 );
             }
@@ -160,6 +169,13 @@ public class DBUtil {
             createCompany = getConnection().prepareStatement(INSERT_COMPANY_QUERY);
         }
         return createCompany;
+    }
+
+    private PreparedStatement getAllAgents() throws SQLException {
+        if(getAgents == null){
+            getAgents = getConnection().prepareStatement(SELECT_AGENT_QUERY);
+        }
+        return getAgents;
     }
 
     private PreparedStatement getCompanyByIdStmt() throws SQLException {
@@ -298,6 +314,17 @@ public class DBUtil {
             e.printStackTrace();
             return 0;
         }
+    }
+
+    public ResultSet getAllAgentsCommand(){
+        try{
+            PreparedStatement stmt = getAllAgents();
+            return stmt.executeQuery();
+        }
+          catch(Exception e){
+            e.printStackTrace();
+            return null;
+          }
     }
 
     public ResultSet getCompanyById(int companyId) {
