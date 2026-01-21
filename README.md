@@ -1,7 +1,8 @@
 ## Base layer of a JDBC working driver with OracleJDBC and JavaFX libraries.
 
-### So far no real updates made.
+### Implemented simple custom query and connected to database.
 
-### This is to serve as a base working version for future commits.
-
-* It's a pain in the ass to setup....
+### TODOs:
+* Fix UI layout
+* Fix queries
+* Test IO capabilities
