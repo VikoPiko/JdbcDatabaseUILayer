@@ -34,6 +34,14 @@ public class DBUtil {
     private static final String SELECT_APARTMENT_BY_NUMBER_OF_ROOMS =
             "Select * From Apartments where NUMBER_OF_ROOMS >= ?";
 
+    private static final String SELECT_ALL_PEOPLE_QUERY =
+            "SELECT * FROM PERSON";
+    private static final String SELECT_PERSON_BY_ID =
+            "SELECT * FROM PERSON where id = ?";
+
+    private static final String INSERT_PERSON_QUERY =
+            "INSERT INTO PERSON(first_name, last_name, email, address, phone_number) values (?,?,?,?)";
+
     private static final String SELECT_AGENT_QUERY =
             "SELECT * FROM AGENT";
 
@@ -168,8 +176,87 @@ public class DBUtil {
      * }
      * */
 
+
+
+    public ResultSet getAllPeopleCommand(){
+        try{
+            PreparedStatement statement = getConnection().prepareStatement(SELECT_ALL_PEOPLE_QUERY);
+            return statement.executeQuery();
+        } catch(SQLException e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+//    public int getPersonById(int id){
+//        try{
+//            PreparedStatement statement = getConnection().prepareStatement(SELECT_PERSON_BY_ID);
+//            statement.setInt(1, id);
+//            return statement.executeUpdate();
+//        } catch(SQLException e){
+//            e.printStackTrace();
+//            return 0;
+//        }
+//    }
+
+    public ResultSet getPersonById(int id) throws SQLException {
+        String sql = "SELECT * FROM Person WHERE person_id=?";
+        PreparedStatement ps = getConnection().prepareStatement(sql);
+        ps.setInt(1, id);
+        return ps.executeQuery();
+    }
+
+    public ResultSet updatePersonById(){
+        try{
+            PreparedStatement statement = getConnection().prepareStatement(SELECT_ALL_PEOPLE_QUERY);
+            return statement.executeQuery();
+        } catch(SQLException e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public ResultSet deletePersonById(){
+        try{
+            PreparedStatement statement = getConnection().prepareStatement(SELECT_ALL_PEOPLE_QUERY);
+            return statement.executeQuery();
+        } catch(SQLException e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+    public void insertPerson(String fn, String ln, String email, String phone) throws SQLException {
+        String sql = "INSERT INTO Person(first_name,last_name,email,phone_number) VALUES (?,?,?,?)";
+        PreparedStatement ps = getConnection().prepareStatement(sql);
+        ps.setString(1, fn);
+        ps.setString(2, ln);
+        ps.setString(3, email);
+        ps.setString(4, phone);
+        ps.executeUpdate();
+    }
+
+    public void updatePerson(int id, String fn, String ln, String email, String phone) throws SQLException {
+        String sql = "UPDATE Person SET first_name=?, last_name=?, email=?, phone_number=? WHERE person_id=?";
+        PreparedStatement ps = getConnection().prepareStatement(sql);
+        ps.setString(1, fn);
+        ps.setString(2, ln);
+        ps.setString(3, email);
+        ps.setString(4, phone);
+        ps.setInt(5, id);
+        ps.executeUpdate();
+    }
+
+    public void deletePerson(int id) throws SQLException {
+        String sql = "DELETE FROM Person WHERE person_id=?";
+        PreparedStatement ps = getConnection().prepareStatement(sql);
+        ps.setInt(1, id);
+        ps.executeUpdate();
+    }
+    //Okay not the best either return a list or just use the old one...
+    //Apparently ResultSet is out of scope by the time its returned.
     public ResultSet getAllAgentsCommand(){
-        try(PreparedStatement statement = getConnection().prepareStatement(SELECT_AGENT_QUERY)){
+        try{
+            PreparedStatement statement = getConnection().prepareStatement(SELECT_AGENT_QUERY);
             return statement.executeQuery();
         }
           catch(Exception e){
@@ -179,8 +266,8 @@ public class DBUtil {
     }
 
     public ResultSet getAgentByIdCommand(int id){
-        try(PreparedStatement statement = getConnection().prepareStatement(SELECT_AGENT_BY_ID_QUERY);){
-
+        try{
+            PreparedStatement statement = getConnection().prepareStatement(SELECT_AGENT_BY_ID_QUERY);
             statement.setInt(1, id);
 
             return statement.executeQuery();
@@ -194,9 +281,9 @@ public class DBUtil {
     //BETTER PRACTICE CODE -> ALWAYS CLOSE CONNECTION
     public int updateAgentSalaryCommand(int id, double salary) {
 
-        try (PreparedStatement stmt =
-                     getConnection().prepareStatement(UPDATE_AGENT_SALARY_QUERY)) {
-
+        try {
+            PreparedStatement stmt =
+                    getConnection().prepareStatement(UPDATE_AGENT_SALARY_QUERY);
             stmt.setDouble(1, salary);
             stmt.setInt(2, id);
 
@@ -209,7 +296,8 @@ public class DBUtil {
     }
 
     public int deleteAgent(int id){
-        try(PreparedStatement statement = getConnection().prepareStatement(DELETE_AGENT_QUERY)) {
+        try {
+            PreparedStatement statement = getConnection().prepareStatement(DELETE_AGENT_QUERY);
             statement.setInt(1, id);
 
             return statement.executeUpdate();
@@ -220,8 +308,11 @@ public class DBUtil {
         }
     }
 
+
+
     public ResultSet getAllApartmentsCommand() {
-        try (PreparedStatement statement = getConnection().prepareStatement(SELECT_ALL_APARTMENTS_QUERY)) {
+        try {
+            PreparedStatement statement = getConnection().prepareStatement(SELECT_ALL_APARTMENTS_QUERY);
             return statement.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();
