@@ -11,8 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class PersonController {
-    @FXML
-    private TextField firstName;
+    @FXML private TextField firstName;
     @FXML private TextField lastName;
     @FXML private TextField email;
     @FXML private TextField phoneNumber;
