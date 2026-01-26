@@ -21,7 +21,7 @@
     <children>
         <Button onAction="#showAllProducts" text="Show all products" GridPane.rowIndex="0" />
 
-        <Button onAction="#showAgentById" text="Get Agent by ID" GridPane.rowIndex="2" />
+        <Button onAction="#openAgentForm" text="Open Agents Form" GridPane.rowIndex="2" />
 
         <Button onAction="#showAllPeople" text="Get All People" GridPane.rowIndex="3" />
 

@@ -127,6 +127,21 @@ public class MainController {
         }
     }
 
+    public void openAgentForm(ActionEvent event) throws IOException {
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AgentDialog.fxml"));
+            Parent tableParent = fxmlLoader.load();
+
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Agent Editor");
+            stage.setScene(new Scene(tableParent));
+            stage.show();
+        }catch(Exception e){
+            showError(e.getMessage());
+        }
+    }
+
     // -----------------------------
     // SEARCH PRODUCT (example by ID)
     // -----------------------------
