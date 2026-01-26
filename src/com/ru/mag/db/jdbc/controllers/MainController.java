@@ -1,4 +1,4 @@
-package com.ru.mag.db.jdbc.gui;
+package com.ru.mag.db.jdbc.controllers;
 
 import com.ru.mag.db.jdbc.util.DBUtil;
 import javafx.event.ActionEvent;
@@ -13,7 +13,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 
 public class MainController {
 
@@ -84,6 +83,41 @@ public class MainController {
             stage.show();
 
         } catch (Exception e){
+            showError(e.getMessage());
+        }
+    }
+
+
+    public void openProperties(ActionEvent event) throws IOException {
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("PropertyDialog.fxml"));
+            Parent tableParent = fxmlLoader.load();
+
+            PropertyController propertyController = fxmlLoader.getController();
+
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Property");
+            stage.setScene(new Scene(tableParent));
+            stage.show();
+        }catch(Exception e){
+            showError(e.getMessage());
+        }
+    }
+
+    public void openPropOwnerForm(ActionEvent event) throws IOException {
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("PropertyOwnerDialog.fxml"));
+            Parent tableParent = fxmlLoader.load();
+
+            PropertyOwnerController propertyController = fxmlLoader.getController();
+
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Property");
+            stage.setScene(new Scene(tableParent));
+            stage.show();
+        }catch(Exception e){
             showError(e.getMessage());
         }
     }

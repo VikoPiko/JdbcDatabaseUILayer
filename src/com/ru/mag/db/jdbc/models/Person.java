@@ -16,6 +16,12 @@ public class Person {
         this.phoneNumber = phoneNumber;
     }
 
+    public Person(int id, String firstName, String lastName){
+        this.personId = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
     public String getFirstName() {
         return firstName;
     }
@@ -46,5 +52,14 @@ public class Person {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public String getDisplayName() {
+        return personId + " | " + firstName + " " + lastName;
+    }
+
+    @Override
+    public String toString() {
+        return getDisplayName();
     }
 }

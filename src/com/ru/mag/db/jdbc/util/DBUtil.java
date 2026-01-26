@@ -1,8 +1,11 @@
 package com.ru.mag.db.jdbc.util;
 
+import com.ru.mag.db.jdbc.models.Person;
 import oracle.jdbc.proxy.annotation.Pre;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DBUtil {
 
@@ -55,6 +58,9 @@ public class DBUtil {
 
     public static final String SELECT_CLIENT_BY_ID_QUERY =
             "SELECT * FROM Client where person_id = ?";
+
+    public static final String SELECT_PROPERTIES_BY_OWNER_ID_QUERY =
+            "SELECT * FROM Property where owner_id = ?";
 
     public static final String INSERT_AGENT_QUERY =
             "INSERT INTO Agent(salary, hireDate) VALUES(?,?)";
@@ -185,27 +191,35 @@ public class DBUtil {
      * */
 
 
-
-    public ResultSet getAllPeopleCommand(){
+    public ResultSet getAllPeopleCommand() throws SQLException {
         try{
             PreparedStatement statement = getConnection().prepareStatement(SELECT_ALL_PEOPLE_QUERY);
             return statement.executeQuery();
-        } catch(SQLException e){
+        } catch(Exception e){
             e.printStackTrace();
             return null;
         }
     }
 
-//    public int getPersonById(int id){
-//        try{
-//            PreparedStatement statement = getConnection().prepareStatement(SELECT_PERSON_BY_ID);
-//            statement.setInt(1, id);
-//            return statement.executeUpdate();
-//        } catch(SQLException e){
-//            e.printStackTrace();
-//            return 0;
-//        }
-//    }
+    public List<Person> getShortenedPeopleCommand() throws SQLException {
+        List<Person> list = new ArrayList<>();
+
+        PreparedStatement statement = getConnection().prepareStatement(
+                "SELECT person_id, first_name, last_name FROM person"
+        );
+
+        ResultSet rs = statement.executeQuery();
+
+        while (rs.next()) {
+            list.add(new Person(
+                    rs.getInt("person_id"),
+                    rs.getString("first_name"),
+                    rs.getString("last_name")
+            ));
+        }
+
+        return list;
+    }
 
     public ResultSet getPersonById(int id) throws SQLException {
         String sql = "SELECT * FROM Person WHERE person_id=?";
@@ -309,6 +323,39 @@ public class DBUtil {
         }
     }
 
+    public ResultSet getPropertyByOwnerId(int id){
+        try{
+            PreparedStatement statement = getConnection().prepareStatement(SELECT_PROPERTIES_BY_OWNER_ID_QUERY);
+            statement.setInt(1, id);
+
+            return statement.executeQuery();
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    private String INSERT_PROPERTY_QUERY =
+            "Insert into Property (price, square_meters, location, property_type, owner_id) " +
+                    "values (?, ?, ?, ?, ?)";
+
+    public int insertProperty(Double price, double square_meters, String location, String property_type, int owner_id) throws SQLException {
+        try{
+            PreparedStatement statement = getConnection().prepareStatement(INSERT_PROPERTY_QUERY);
+            statement.setDouble(1, price);
+            statement.setDouble(2, square_meters); //
+            statement.setDouble(3, price);
+            statement.setDouble(4, price);
+            statement.setDouble(5, price);
+
+            return statement.executeUpdate();
+        } catch(SQLException e){
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
     //Okay not the best either return a list or just use the old one...
     //Apparently ResultSet is out of scope by the time its returned.
     public ResultSet getAllAgentsCommand(){
@@ -363,6 +410,17 @@ public class DBUtil {
             e.printStackTrace();
             return 0;
         }
+    }
+
+    public ResultSet getAllOwners() throws SQLException {
+        return getConnection().createStatement().executeQuery("SELECT * FROM property_owner");
+    }
+
+    public void insertOwner(int personId) throws SQLException {
+        String sql = "INSERT INTO property_owner(person_id) VALUES(?)";
+        PreparedStatement ps = getConnection().prepareStatement(sql);
+        ps.setInt(1, personId);
+        ps.executeUpdate();
     }
 
 

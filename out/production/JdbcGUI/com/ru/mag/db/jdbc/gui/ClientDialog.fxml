@@ -18,7 +18,7 @@
        <Label layoutX="521.0" layoutY="41.0" text="Person Data" textFill="#7c7a7a" />
        <Button layoutX="340.0" layoutY="349.0" mnemonicParsing="false" onAction="#handleCreate" text="Create" />
        <Button layoutX="411.0" layoutY="349.0" mnemonicParsing="false" onAction="#handleUpdate" text="Update" />
-       <Button layoutX="486.0" layoutY="349.0" mnemonicParsing="false" text="Delete" />
+       <Button layoutX="486.0" layoutY="349.0" mnemonicParsing="false" onAction="#handleDelete" text="Delete" />
        <Button layoutX="438.0" layoutY="88.0" mnemonicParsing="false" onAction="#findUserById" text="Get by ID" />
       <Button layoutX="227.0" layoutY="349.0" mnemonicParsing="false" onAction="#showAllClients" text="Get All Clients" />
       <TextField fx:id="budget" layoutX="14.0" layoutY="101.0" />

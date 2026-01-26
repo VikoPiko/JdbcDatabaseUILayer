@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="491.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ru.mag.db.jdbc.controllers.PropertyOwnerController">
+   <children>
+      <Label layoutX="157.0" layoutY="14.0" text="Owner Overview">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="personSelector" layoutX="14.0" layoutY="113.0" prefHeight="25.0" prefWidth="168.0" promptText="Select Person" />
+      <Label layoutX="16.0" layoutY="94.0" text="ID | Person Name" />
+   </children>
+</AnchorPane>

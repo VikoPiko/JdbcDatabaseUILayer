@@ -1,36 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<GridPane alignment="center" hgap="10" prefHeight="350.0" prefWidth="350.0" vgap="10" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ru.mag.db.jdbc.gui.MainController">
+<!--<GridPane alignment="center" gridLinesVisible="true" hgap="10" prefHeight="350.0" prefWidth="350.0" vgap="10"-->
+<!--          xmlns="http://javafx.com/javafx/17.0.12"-->
+<!--          xmlns:fx="http://javafx.com/fxml/1"-->
+<!--          fx:controller="com.ru.mag.db.jdbc.controllers.MainController">-->
+<!--    <columnConstraints>-->
+<!--&lt;!&ndash;        <ColumnConstraints maxWidth="0.0" minWidth="0.0" prefWidth="0.0" />&ndash;&gt;-->
+<!--      <ColumnConstraints halignment="CENTER" maxWidth="117.0" minWidth="117.0" prefWidth="117.0" />-->
+<!--    </columnConstraints>-->
+<!--    <rowConstraints>-->
+<!--      <RowConstraints minHeight="10.0" prefHeight="40.0" />-->
+<!--        <RowConstraints prefHeight="40.0" />-->
+<!--        <RowConstraints prefHeight="40.0" />-->
+<!--        <RowConstraints prefHeight="40.0" />-->
+<!--        <RowConstraints prefHeight="40.0" />-->
+<!--        <RowConstraints prefHeight="40.0" />-->
+<!--      <RowConstraints prefHeight="40.0" />-->
+<!--    </rowConstraints>-->
+<!--    <children>-->
+<!--        <Button onAction="#openClientsForm" text="Open Clients Form" GridPane.columnIndex="1" GridPane.rowIndex="1" />-->
+<!--        <Button onAction="#openAgentForm" text="Open Agents Form" GridPane.columnIndex="1" GridPane.rowIndex="3" />-->
+<!--        <Button onAction="#showAllPeople" text="Get All People" GridPane.columnIndex="1" GridPane.rowIndex="4" />-->
+<!--&lt;!&ndash;        <Button text="Show manufacturers"&ndash;&gt;-->
+<!--&lt;!&ndash;                onAction="#showManufacturers"&ndash;&gt;-->
+<!--&lt;!&ndash;                GridPane.rowIndex="3"/>&ndash;&gt;-->
+<!--        <Button onAction="#openPersonForm" text="Open Person Form" GridPane.columnIndex="1" GridPane.rowIndex="6" />-->
+<!--      <Button mnemonicParsing="false" onAction="#showAllAgents" text="Get All Agents" GridPane.columnIndex="1" GridPane.rowIndex="5" />-->
+<!--    </children>-->
+<!--</GridPane>-->
 
-    <columnConstraints>
-        <ColumnConstraints />
-      <ColumnConstraints halignment="CENTER" />
-    </columnConstraints>
-
-    <rowConstraints>
-        <RowConstraints prefHeight="40.0" />
-        <RowConstraints prefHeight="40.0" />
-        <RowConstraints prefHeight="40.0" />
-        <RowConstraints prefHeight="40.0" />
-        <RowConstraints prefHeight="40.0" />
-      <RowConstraints prefHeight="40.0" />
-    </rowConstraints>
-
-    <children>
-        <Button onAction="#openClientsForm" text="Open Clients Form" GridPane.columnIndex="1" />
-
-        <Button onAction="#openAgentForm" text="Open Agents Form" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-
-        <Button onAction="#showAllPeople" text="Get All People" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-
-<!--        <Button text="Show manufacturers"-->
-<!--                onAction="#showManufacturers"-->
-<!--                GridPane.rowIndex="3"/>-->
-
-        <Button onAction="#openPersonForm" text="Open Person Form" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-      <Button mnemonicParsing="false" onAction="#showAllAgents" text="Get All Agents" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-    </children>
-</GridPane>
+<VBox alignment="CENTER" spacing="15.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ru.mag.db.jdbc.controllers.MainController">
+    <Button onAction="#openClientsForm" text="Open Clients Form" />
+   <Button mnemonicParsing="false" onAction="#openProperties" text="Open Properties Form" />
+    <Button onAction="#openAgentForm" text="Open Agents Form" />
+    <Button onAction="#showAllPeople" text="Get All People" />
+    <Button onAction="#showAllAgents" text="Get All Agents" />
+    <Button onAction="#openPersonForm" text="Open Person Form" />
+   <Button mnemonicParsing="false" onAction="#openPropOwnerForm" text="Open PropertyOwner Form" />
+   <Button mnemonicParsing="false" text="Button" />
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
+</VBox>

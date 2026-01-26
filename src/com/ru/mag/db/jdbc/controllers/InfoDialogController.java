@@ -1,4 +1,4 @@
-package com.ru.mag.db.jdbc.gui;
+package com.ru.mag.db.jdbc.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -6,14 +6,16 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
-public class TestController {
+public class InfoDialogController {
     @FXML
-    Label testLabel;
+    Label infoLabel;
 
-    public void setLabelText(String text){
-        testLabel.setText(text);
+    public void setInfoLabel(String info){
+        infoLabel.setText(info);
     }
+
     public void closeDialog(ActionEvent event){
         ((Stage)(((Node)event.getSource()).getScene().getWindow())).close();
     }
+
 }

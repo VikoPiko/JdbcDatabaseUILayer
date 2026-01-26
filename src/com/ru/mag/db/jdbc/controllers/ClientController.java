@@ -1,4 +1,4 @@
-package com.ru.mag.db.jdbc.gui;
+package com.ru.mag.db.jdbc.controllers;
 
 import com.ru.mag.db.jdbc.util.DBUtil;
 import javafx.event.ActionEvent;
@@ -12,7 +12,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.sql.Date;
 import java.sql.ResultSet;
 
 public class ClientController {
