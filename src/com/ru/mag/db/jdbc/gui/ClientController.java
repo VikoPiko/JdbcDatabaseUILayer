@@ -93,6 +93,25 @@ public class ClientController {
         }
     }
 
+    public void handleUpdate() {
+        try {
+            if(personId.getText().isEmpty()){
+                showError("Enter Person ID first!\nPerson must be selected.");
+            }
+            if(areaInterestedIn == null || budget == null) {
+                showError("Please fill all the fields");
+            }
+            double budgetVal = Double.parseDouble(budget.getText());
+            int id = Integer.parseInt(personId.getText());
+            DBUtil.getInstance().updateClient(
+                    id, budgetVal, areaInterestedIn.getText()
+            );
+            showInfo("Client with ID: " + personId.getText() + " updated");
+        } catch (Exception e) {
+            showError(e.getMessage());
+        }
+    }
+
     private void showInfo(String msg) {
         new Alert(Alert.AlertType.INFORMATION, msg).show();
     }

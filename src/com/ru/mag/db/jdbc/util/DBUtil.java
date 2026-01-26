@@ -252,6 +252,15 @@ public class DBUtil {
         ps.executeUpdate();
     }
 
+    public void updateClient(int id, double budget, String area_interested_in) throws SQLException {
+        String sql = "UPDATE Client SET budget=?, area_interested_in=? WHERE person_id=?";
+        PreparedStatement ps = getConnection().prepareStatement(sql);
+        ps.setDouble(1, budget);
+        ps.setString(2, area_interested_in);
+        ps.setInt(3, id);
+        ps.executeUpdate();
+    }
+
 
     public void updatePerson(int id, String fn, String ln, String email, String phone) throws SQLException {
         String sql = "UPDATE Person SET first_name=?, last_name=?, email=?, phone_number=? WHERE person_id=?";
