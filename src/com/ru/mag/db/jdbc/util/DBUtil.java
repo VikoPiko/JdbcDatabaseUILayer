@@ -279,6 +279,12 @@ public class DBUtil {
         ps.setInt(1, id);
         ps.executeUpdate();
     }
+    public void deleteClient(int id) throws SQLException {
+        String sql = "DELETE FROM Client WHERE person_id=?";
+        PreparedStatement ps = getConnection().prepareStatement(sql);
+        ps.setInt(1, id);
+        ps.executeUpdate();
+    }
 
     public ResultSet getAllClientsCommand(){
         try{

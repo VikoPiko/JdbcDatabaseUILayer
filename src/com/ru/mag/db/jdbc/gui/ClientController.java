@@ -112,6 +112,19 @@ public class ClientController {
         }
     }
 
+    public void handleDelete(){
+        try {
+            if(personId.getText().isEmpty()){
+                showError("Enter Person ID first!\nPerson must be selected.");
+            }
+            int id = Integer.parseInt(personId.getText());
+            DBUtil.getInstance().deleteClient(id);
+            showInfo("Client with ID: " + personId.getText() + " DELETED!");
+        } catch (Exception e) {
+            showError(e.getMessage());
+        }
+    }
+
     private void showInfo(String msg) {
         new Alert(Alert.AlertType.INFORMATION, msg).show();
     }
