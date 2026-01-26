@@ -1,5 +1,7 @@
 package com.ru.mag.db.jdbc.util;
 
+import oracle.jdbc.proxy.annotation.Pre;
+
 import java.sql.*;
 
 public class DBUtil {
@@ -45,8 +47,14 @@ public class DBUtil {
     private static final String SELECT_AGENT_QUERY =
             "SELECT * FROM AGENT";
 
+    private static final String SELECT_CLIENTS_QUERY =
+            "SELECT * FROM CLIENT";
+
     public static final String SELECT_AGENT_BY_ID_QUERY =
             "SELECT * FROM Agent where person_id = ?";
+
+    public static final String SELECT_CLIENT_BY_ID_QUERY =
+            "SELECT * FROM Client where person_id = ?";
 
     public static final String INSERT_AGENT_QUERY =
             "INSERT INTO Agent(salary, hireDate) VALUES(?,?)";
@@ -235,6 +243,16 @@ public class DBUtil {
         ps.executeUpdate();
     }
 
+    public void insertClient(int personId, double budget, String areaInterestedIn) throws SQLException {
+        String sql = "INSERT INTO Client(person_id, budget, area_interested_in) VALUES (?,?,?)";
+        PreparedStatement ps = getConnection().prepareStatement(sql);
+        ps.setInt(1, personId);
+        ps.setDouble(2, budget);
+        ps.setString(3, areaInterestedIn);
+        ps.executeUpdate();
+    }
+
+
     public void updatePerson(int id, String fn, String ln, String email, String phone) throws SQLException {
         String sql = "UPDATE Person SET first_name=?, last_name=?, email=?, phone_number=? WHERE person_id=?";
         PreparedStatement ps = getConnection().prepareStatement(sql);
@@ -252,6 +270,30 @@ public class DBUtil {
         ps.setInt(1, id);
         ps.executeUpdate();
     }
+
+    public ResultSet getAllClientsCommand(){
+        try{
+            PreparedStatement statement = getConnection().prepareStatement(SELECT_CLIENTS_QUERY);
+            return statement.executeQuery();
+        }catch(SQLException e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public ResultSet getClientByIdCommand(int id){
+        try{
+            PreparedStatement statement = getConnection().prepareStatement(SELECT_CLIENT_BY_ID_QUERY);
+            statement.setInt(1, id);
+
+            return statement.executeQuery();
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     //Okay not the best either return a list or just use the old one...
     //Apparently ResultSet is out of scope by the time its returned.
     public ResultSet getAllAgentsCommand(){

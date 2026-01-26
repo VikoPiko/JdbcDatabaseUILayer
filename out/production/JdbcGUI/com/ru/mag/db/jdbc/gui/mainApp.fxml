@@ -6,7 +6,8 @@
 <GridPane alignment="center" hgap="10" prefHeight="350.0" prefWidth="350.0" vgap="10" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ru.mag.db.jdbc.gui.MainController">
 
     <columnConstraints>
-        <ColumnConstraints halignment="CENTER" />
+        <ColumnConstraints />
+      <ColumnConstraints halignment="CENTER" />
     </columnConstraints>
 
     <rowConstraints>
@@ -19,18 +20,17 @@
     </rowConstraints>
 
     <children>
-        <Button onAction="#showAllProducts" text="Show all products" GridPane.rowIndex="0" />
+        <Button onAction="#openClientsForm" text="Open Clients Form" GridPane.columnIndex="1" />
 
-        <Button onAction="#openAgentForm" text="Open Agents Form" GridPane.rowIndex="2" />
+        <Button onAction="#openAgentForm" text="Open Agents Form" GridPane.columnIndex="1" GridPane.rowIndex="2" />
 
-        <Button onAction="#showAllPeople" text="Get All People" GridPane.rowIndex="3" />
+        <Button onAction="#showAllPeople" text="Get All People" GridPane.columnIndex="1" GridPane.rowIndex="3" />
 
 <!--        <Button text="Show manufacturers"-->
 <!--                onAction="#showManufacturers"-->
 <!--                GridPane.rowIndex="3"/>-->
 
-        <Button onAction="#openPersonForm" text="Open Person Form" GridPane.rowIndex="5" />
-      <Button mnemonicParsing="false" onAction="#showAllAgents" text="Get All Agents" GridPane.rowIndex="4" />
-      <TextField fx:id="agentIdField" prefWidth="176.0" promptText="Enter ID to search" GridPane.rowIndex="1" />
+        <Button onAction="#openPersonForm" text="Open Person Form" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+      <Button mnemonicParsing="false" onAction="#showAllAgents" text="Get All Agents" GridPane.columnIndex="1" GridPane.rowIndex="4" />
     </children>
 </GridPane>

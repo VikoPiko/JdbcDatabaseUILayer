@@ -88,6 +88,23 @@ public class MainController {
         }
     }
 
+    public void openClientsForm(ActionEvent event) throws IOException {
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ClientDialog.fxml"));
+            Parent tableParent = fxmlLoader.load();
+
+            ClientController clientController = fxmlLoader.getController();
+
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Clients");
+            stage.setScene(new Scene(tableParent));
+            stage.show();
+        }catch(Exception e){
+            showError(e.getMessage());
+        }
+    }
+
     public void showAgentById(ActionEvent event) throws IOException {
         try{
             int agentId = Integer.parseInt(agentIdField.getText());
