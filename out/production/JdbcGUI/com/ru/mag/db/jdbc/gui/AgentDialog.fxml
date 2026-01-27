@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ru.mag.db.jdbc.gui.AgentController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ru.mag.db.jdbc.controllers.AgentController">
    <children>
       <Label layoutX="216.0" layoutY="14.0" text="Agent Overview">
          <font>
@@ -30,5 +30,6 @@
       <Button layoutX="411.0" layoutY="349.0" mnemonicParsing="false" text="Update" />
       <Button layoutX="494.0" layoutY="349.0" mnemonicParsing="false" text="Delete" />
       <Button layoutX="438.0" layoutY="88.0" mnemonicParsing="false" onAction="#findUserById" text="Get by ID" />
+      <Button layoutX="21.0" layoutY="343.0" mnemonicParsing="false" onAction="#getAgents" text="Get All Agents" />
    </children>
 </AnchorPane>

@@ -15,10 +15,5 @@
   </rowConstraints>
    <children>
       <Button mnemonicParsing="false" onAction="#closeDialog" text="Ok" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-      <Label fx:id="testLabel" text="Label" textFill="RED" GridPane.halignment="CENTER">
-         <font>
-            <Font name="System Bold Italic" size="25.0" />
-         </font>
-      </Label>
    </children>
 </GridPane>

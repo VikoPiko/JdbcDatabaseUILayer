@@ -124,7 +124,7 @@ public class DBUtil {
         return instance;
     }
 
-    private Connection getConnection() {
+    public Connection getConnection() {
         try {
             if (cachedConnection == null ||
                     cachedConnection.isClosed() ||
@@ -433,6 +433,39 @@ public class DBUtil {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public void insertApartment(int propertyId, int rooms, int bathrooms) throws SQLException {
+        String sql = "INSERT INTO Apartment(property_id, number_of_rooms, number_of_bathrooms) VALUES(?,?,?)";
+        PreparedStatement ps = getConnection().prepareStatement(sql);
+        ps.setInt(1, propertyId);
+        ps.setInt(2, rooms);
+        ps.setInt(3, bathrooms);
+        ps.executeUpdate();
+    }
+
+    public void insertGarage(int propertyId, boolean electricDoor) throws SQLException {
+        String sql = "INSERT INTO Garage(property_id, has_electric_door) VALUES(?,?)";
+        PreparedStatement ps = getConnection().prepareStatement(sql);
+        ps.setInt(1, propertyId);
+        ps.setBoolean(2, electricDoor);
+        ps.executeUpdate();
+    }
+
+    public void insertHouse(int propertyId, int floors) throws SQLException {
+        String sql = "INSERT INTO House(property_id, floors) VALUES(?,?)";
+        PreparedStatement ps = getConnection().prepareStatement(sql);
+        ps.setInt(1, propertyId);
+        ps.setInt(2, floors);
+        ps.executeUpdate();
+    }
+
+    public void insertPropertyImage(int propertyId, String url) throws SQLException {
+        String sql = "INSERT INTO Property_Image(property_id, image_url) VALUES(?,?)";
+        PreparedStatement ps = getConnection().prepareStatement(sql);
+        ps.setInt(1, propertyId);
+        ps.setString(2, url);
+        ps.executeUpdate();
     }
 
 }

@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ru.mag.db.jdbc.gui.TestController">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ru.mag.db.jdbc.controllers.TestController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
   </columnConstraints>
@@ -15,10 +15,5 @@
   </rowConstraints>
    <children>
       <Button mnemonicParsing="false" onAction="#closeDialog" text="Ok" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-      <Label fx:id="testLabel" text="Label" textFill="RED" GridPane.halignment="CENTER">
-         <font>
-            <Font name="System Bold Italic" size="25.0" />
-         </font>
-      </Label>
    </children>
 </GridPane>

@@ -180,7 +180,7 @@ public class MainController {
 
     public void openAgentForm(ActionEvent event) throws IOException {
         try{
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AgentDialog.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../gui/AgentDialog.fxml"));
             Parent tableParent = fxmlLoader.load();
 
             Stage stage = new Stage();

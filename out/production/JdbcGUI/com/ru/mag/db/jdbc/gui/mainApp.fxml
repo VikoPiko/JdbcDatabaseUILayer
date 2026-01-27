@@ -7,7 +7,7 @@
 <!--<GridPane alignment="center" gridLinesVisible="true" hgap="10" prefHeight="350.0" prefWidth="350.0" vgap="10"-->
 <!--          xmlns="http://javafx.com/javafx/17.0.12"-->
 <!--          xmlns:fx="http://javafx.com/fxml/1"-->
-<!--          fx:controller="com.ru.mag.db.jdbc.gui.MainController">-->
+<!--          fx:controller="com.ru.mag.db.jdbc.controllers.MainController">-->
 <!--    <columnConstraints>-->
 <!--&lt;!&ndash;        <ColumnConstraints maxWidth="0.0" minWidth="0.0" prefWidth="0.0" />&ndash;&gt;-->
 <!--      <ColumnConstraints halignment="CENTER" maxWidth="117.0" minWidth="117.0" prefWidth="117.0" />-->
@@ -33,7 +33,7 @@
 <!--    </children>-->
 <!--</GridPane>-->
 
-<VBox alignment="CENTER" spacing="15.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ru.mag.db.jdbc.gui.MainController">
+<VBox alignment="CENTER" spacing="15.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ru.mag.db.jdbc.controllers.MainController">
     <Button onAction="#openClientsForm" text="Open Clients Form" />
    <Button mnemonicParsing="false" onAction="#openProperties" text="Open Properties Form" />
     <Button onAction="#openAgentForm" text="Open Agents Form" />
