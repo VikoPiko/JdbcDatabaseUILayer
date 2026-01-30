@@ -14,10 +14,6 @@ public class Agent extends Person {
         this.hireDate = hireDate;
     }
 
-//    public Agent(int i, String text, String text1, String text2, String text3, double v, java.sql.Date date) {
-//
-//    }
-
     public void setId(int id) {
         this.id = id;
     }

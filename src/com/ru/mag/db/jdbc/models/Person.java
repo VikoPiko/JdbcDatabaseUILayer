@@ -22,6 +22,9 @@ public class Person {
         this.lastName = lastName;
     }
 
+    public int getId(){return personId;}
+    public void setId(int id){this.personId = id;}
+
     public String getFirstName() {
         return firstName;
     }

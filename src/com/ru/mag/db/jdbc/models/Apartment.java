@@ -3,12 +3,14 @@ package com.ru.mag.db.jdbc.models;
 public class Apartment {
     private int propertyId;
     private int rooms;
+    private int floor;
     private int bathrooms;
 
     public Apartment() {}
 
-    public Apartment(int propertyId, int rooms, int bathrooms) {
+    public Apartment(int propertyId, int rooms, int floor, int bathrooms) {
         this.propertyId = propertyId;
+        this.floor = floor;
         this.rooms = rooms;
         this.bathrooms = bathrooms;
     }

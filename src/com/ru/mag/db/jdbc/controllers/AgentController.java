@@ -90,7 +90,7 @@ public class AgentController {
                     Double.parseDouble(salary.getText()),
                     Date.valueOf(hireDate.getValue())
             );
-            agentRepo.createAgentCommand(agent);
+            agentRepo.createAgent(agent);
             showInfo("Agent created successfully!");
         } catch (Exception e) {
             showError(e.getMessage());
@@ -127,12 +127,12 @@ public class AgentController {
         }
     }
 
-    private void showInfo(String msg) {
-        new Alert(Alert.AlertType.INFORMATION, msg).show();
-    }
+        private void showInfo(String msg) {
+            new Alert(Alert.AlertType.INFORMATION, msg).show();
+        }
 
-    private void showError(String msg) {
-        new Alert(Alert.AlertType.ERROR, msg).show();
-    }
+        private void showError(String msg) {
+            new Alert(Alert.AlertType.ERROR, msg).show();
+        }
 
 }

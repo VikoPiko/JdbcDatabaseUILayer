@@ -8,6 +8,16 @@ public class Property {
     private String type;
     private int ownerId;
 
+    /**
+     * create type location_t as object ( latitude varchar2(10), longtitude varchar2(10), city varchar2(20) );
+     * @param id
+     * @param price
+     * @param squareMeters
+     * @param location
+     * @param type
+     * @param ownerId
+     */
+
     public Property(int id, double price, int squareMeters, String location, String type, int ownerId) {
         this.id = id;
         this.price = price;
