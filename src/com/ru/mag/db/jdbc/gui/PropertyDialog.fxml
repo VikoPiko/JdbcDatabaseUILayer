@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ru.mag.db.jdbc.controllers.PropertyController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@app.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ru.mag.db.jdbc.controllers.PropertyController">
    <children>
       <Label layoutX="203.0" layoutY="14.0" text="Property Overview">
          <font>
@@ -21,11 +21,11 @@
       <Label layoutX="13.0" layoutY="142.0" text="Square Meters" />
       <Label layoutX="13.0" layoutY="192.0" text="Location" />
       <Label layoutX="14.0" layoutY="235.0" text="Property Type" />
-      <Button layoutX="473.0" layoutY="130.0" mnemonicParsing="false" text="Find Propertyby ID" />
-      <Button layoutX="329.0" layoutY="353.0" mnemonicParsing="false" onAction="#createProperty" text="Create" />
-      <Button layoutX="398.0" layoutY="353.0" mnemonicParsing="false" text="Update" />
-      <Button layoutX="470.0" layoutY="353.0" mnemonicParsing="false" text="Delete" />
-      <Button layoutX="421.0" layoutY="260.0" mnemonicParsing="false" onAction="#findByOwnerId" text="Find Properties by Owner ID" />
+      <Button layoutX="473.0" layoutY="130.0" mnemonicParsing="false" styleClass="button-secondary" text="Find Propertyby ID" />
+      <Button layoutX="329.0" layoutY="353.0" mnemonicParsing="false" onAction="#createProperty" styleClass="button-primary" text="Create" />
+      <Button layoutX="398.0" layoutY="353.0" mnemonicParsing="false" styleClass="button-secondary" text="Update" />
+      <Button layoutX="470.0" layoutY="353.0" mnemonicParsing="false" styleClass="button-danger" text="Delete" />
+      <Button layoutX="421.0" layoutY="260.0" mnemonicParsing="false" onAction="#findByOwnerId" styleClass="button-secondary" text="Find Properties by Owner ID" />
       <ComboBox fx:id="propertyTypeSelect" layoutX="14.0" layoutY="260.0" prefHeight="25.0" prefWidth="165.0" promptText="Select Property Type" visibleRowCount="3" />
    </children>
 </AnchorPane>

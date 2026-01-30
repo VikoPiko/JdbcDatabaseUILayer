@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/17"
+      xmlns:fx="http://javafx.com/fxml"
+      spacing="10"
+      alignment="CENTER"
+      prefWidth="400"
+      prefHeight="300">
+
+    <Label text="FXML Test"/>
+
+    <TextField promptText="Test field"/>
+
+    <Button text="Test button"/>
+
+</VBox>

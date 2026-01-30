@@ -1,14 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.ru.mag.db.jdbc.controllers.PropertyImageController"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="12.0" stylesheets="@app.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label styleClass="label-title" stylesheets="@app.css" text="Property Image Mangement" />
+      <Separator prefWidth="200.0" />
+      <TextField styleClass="text-field" />
+      <TextField />
+      <TextField />
+      <Separator prefWidth="200.0" />
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="12.0">
+         <children>
+            <Button mnemonicParsing="false" styleClass="button-primary" text="Create" />
+            <Button mnemonicParsing="false" styleClass="button-secondary" text="Update" />
+            <Button mnemonicParsing="false" styleClass="button-danger" text="Delete" />
+         </children>
+      </HBox>
+   </children>
+   <padding>
+      <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+   </padding>
+</VBox>
