@@ -29,7 +29,7 @@ public class ClientController {
             //create a resultset getting the db instance command -> goto db util
             ResultSet rs = DBUtil.getInstance().getAllClientsCommand();
 
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("TableDialog.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../gui/TableDialog.fxml"));
             Parent tableParent = fxmlLoader.load();
 
             TableController tableController = fxmlLoader.getController();

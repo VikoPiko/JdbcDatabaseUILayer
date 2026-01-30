@@ -1,5 +1,6 @@
 package com.ru.mag.db.jdbc.controllers;
 
+import com.ru.mag.db.jdbc.models.Agent;
 import com.ru.mag.db.jdbc.queries.AgentQueries;
 import com.ru.mag.db.jdbc.util.DBUtil;
 import javafx.event.ActionEvent;
@@ -29,6 +30,7 @@ public class AgentController {
 
     AgentQueries agentRepo = new AgentQueries();
 
+    @FXML
     public void findUserById(ActionEvent event) throws IOException {
         try{
             if (personId.getText().isEmpty()) {
@@ -38,7 +40,7 @@ public class AgentController {
             int id = Integer.parseInt(personId.getText());
 
             ResultSet rs = DBUtil.getInstance().getPersonById(id);
-            ResultSet rsAgent = DBUtil.getInstance().getAgentByIdCommand(id);
+            ResultSet rsAgent = agentRepo.getAgentByIdCommand(id);
             if(rsAgent != null && rsAgent.next()){
                 salary.setText(rsAgent.getString("salary"));
                 Date date = rsAgent.getDate("hire_date");
@@ -57,7 +59,8 @@ public class AgentController {
         }
     }
 
-    public void getAgents() {
+    @FXML
+    public void getAgents(ActionEvent event) throws IOException {
         try {
             ResultSet rs = agentRepo.getAllAgentsCommand();
 
@@ -76,6 +79,51 @@ public class AgentController {
         } catch (Exception e) {
             showError(e.getMessage());
             e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void createAgent(ActionEvent event) {
+        try {
+            Agent agent = new Agent(
+                    Integer.parseInt(personId.getText()),
+                    Double.parseDouble(salary.getText()),
+                    Date.valueOf(hireDate.getValue())
+            );
+            agentRepo.createAgentCommand(agent);
+            showInfo("Agent created successfully!");
+        } catch (Exception e) {
+            showError(e.getMessage());
+        }
+    }
+
+    @FXML
+    private void updateAgent(ActionEvent event) {
+        try {
+            Agent agent = new Agent(
+                    Integer.parseInt(personId.getText()),
+                    Double.parseDouble(salary.getText()),
+                    Date.valueOf(hireDate.getValue())
+            );
+            agentRepo.updateAgentCommand(agent);
+            showInfo("Agent with ID: " + agent.getId() + " updated successfully!");
+        } catch (Exception e) {
+            showError(e.getMessage());
+        }
+    }
+
+    @FXML
+    private void deleteAgent(ActionEvent event) {
+        try {
+            Agent agent = new Agent(
+                    Integer.parseInt(personId.getText()),
+                    Double.parseDouble(salary.getText()),
+                    Date.valueOf(hireDate.getValue())
+            );
+            agentRepo.deleteAgentCommand(agent);
+            showInfo("Agent with ID: "+ agent.getId() +" deleted successfully!");
+        } catch (Exception e) {
+            showError(e.getMessage());
         }
     }
 

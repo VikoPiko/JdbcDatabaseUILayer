@@ -48,7 +48,7 @@ public class PropertyController implements Initializable {
             ResultSet rs = DBUtil.getInstance().getPersonById(id);
             ResultSet rsOwnerProperties = DBUtil.getInstance().getPropertyByOwnerId(id);
             if(rsOwnerProperties != null && rsOwnerProperties.next()){
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("TableDialog.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/TableDialog.fxml"));
                 Parent tableParent = loader.load();
 
                 TableController tableController = loader.getController();

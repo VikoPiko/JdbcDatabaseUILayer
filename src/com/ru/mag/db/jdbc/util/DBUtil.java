@@ -149,13 +149,6 @@ public class DBUtil {
     // Looked some stuff up, apparently caching the req/res is not ideal -> Could lead to leaks & Open connecitons
     // Try with resources seems to be a better solution for this case.
     // -----------------------------
-    private PreparedStatement getCreateCompanyStmt() throws SQLException {
-        if (createCompany == null) {
-            createCompany = getConnection().prepareStatement(INSERT_COMPANY_QUERY);
-        }
-        return createCompany;
-    }
-
     // -----------------------------
     // CRUD METHODS: AGENTS
     // -----------------------------
@@ -358,114 +351,5 @@ public class DBUtil {
 
     //Okay not the best either return a list or just use the old one...
     //Apparently ResultSet is out of scope by the time its returned.
-    public ResultSet getAllAgentsCommand(){
-        try{
-            PreparedStatement statement = getConnection().prepareStatement(SELECT_AGENT_QUERY);
-            return statement.executeQuery();
-        }
-          catch(Exception e){
-            e.printStackTrace();
-            return null;
-          }
-    }
-
-    public ResultSet getAgentByIdCommand(int id){
-        try{
-            PreparedStatement statement = getConnection().prepareStatement(SELECT_AGENT_BY_ID_QUERY);
-            statement.setInt(1, id);
-
-            return statement.executeQuery();
-        }
-        catch(Exception e){
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    //BETTER PRACTICE CODE -> ALWAYS CLOSE CONNECTION
-    public int updateAgentSalaryCommand(int id, double salary) {
-
-        try {
-            PreparedStatement stmt =
-                    getConnection().prepareStatement(UPDATE_AGENT_SALARY_QUERY);
-            stmt.setDouble(1, salary);
-            stmt.setInt(2, id);
-
-            return stmt.executeUpdate();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return 0;
-        }
-    }
-
-    public int deleteAgent(int id){
-        try {
-            PreparedStatement statement = getConnection().prepareStatement(DELETE_AGENT_QUERY);
-            statement.setInt(1, id);
-
-            return statement.executeUpdate();
-        }
-        catch(Exception e){
-            e.printStackTrace();
-            return 0;
-        }
-    }
-
-    public ResultSet getAllOwners() throws SQLException {
-        return getConnection().createStatement().executeQuery("SELECT * FROM property_owner");
-    }
-
-    public void insertOwner(int personId) throws SQLException {
-        String sql = "INSERT INTO property_owner(person_id) VALUES(?)";
-        PreparedStatement ps = getConnection().prepareStatement(sql);
-        ps.setInt(1, personId);
-        ps.executeUpdate();
-    }
-
-
-
-    public ResultSet getAllApartmentsCommand() {
-        try {
-            PreparedStatement statement = getConnection().prepareStatement(SELECT_ALL_APARTMENTS_QUERY);
-            return statement.executeQuery();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    public void insertApartment(int propertyId, int rooms, int bathrooms) throws SQLException {
-        String sql = "INSERT INTO Apartment(property_id, number_of_rooms, number_of_bathrooms) VALUES(?,?,?)";
-        PreparedStatement ps = getConnection().prepareStatement(sql);
-        ps.setInt(1, propertyId);
-        ps.setInt(2, rooms);
-        ps.setInt(3, bathrooms);
-        ps.executeUpdate();
-    }
-
-    public void insertGarage(int propertyId, boolean electricDoor) throws SQLException {
-        String sql = "INSERT INTO Garage(property_id, has_electric_door) VALUES(?,?)";
-        PreparedStatement ps = getConnection().prepareStatement(sql);
-        ps.setInt(1, propertyId);
-        ps.setBoolean(2, electricDoor);
-        ps.executeUpdate();
-    }
-
-    public void insertHouse(int propertyId, int floors) throws SQLException {
-        String sql = "INSERT INTO House(property_id, floors) VALUES(?,?)";
-        PreparedStatement ps = getConnection().prepareStatement(sql);
-        ps.setInt(1, propertyId);
-        ps.setInt(2, floors);
-        ps.executeUpdate();
-    }
-
-    public void insertPropertyImage(int propertyId, String url) throws SQLException {
-        String sql = "INSERT INTO Property_Image(property_id, image_url) VALUES(?,?)";
-        PreparedStatement ps = getConnection().prepareStatement(sql);
-        ps.setInt(1, propertyId);
-        ps.setString(2, url);
-        ps.executeUpdate();
-    }
 
 }

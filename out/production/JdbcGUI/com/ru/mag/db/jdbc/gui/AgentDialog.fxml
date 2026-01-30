@@ -26,7 +26,7 @@
       <Label layoutX="553.0" layoutY="213.0" text="Email" />
       <Label layoutX="502.0" layoutY="261.0" text="Phone Number" />
       <Label layoutX="521.0" layoutY="41.0" text="Person Data" textFill="#7c7a7a" />
-      <Button layoutX="333.0" layoutY="349.0" mnemonicParsing="false" text="Create" />
+      <Button layoutX="333.0" layoutY="349.0" mnemonicParsing="false" text="Create" onAction="#createAgent"/>
       <Button layoutX="411.0" layoutY="349.0" mnemonicParsing="false" text="Update" />
       <Button layoutX="494.0" layoutY="349.0" mnemonicParsing="false" text="Delete" />
       <Button layoutX="438.0" layoutY="88.0" mnemonicParsing="false" onAction="#findUserById" text="Get by ID" />

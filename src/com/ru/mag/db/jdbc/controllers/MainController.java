@@ -1,5 +1,6 @@
 package com.ru.mag.db.jdbc.controllers;
 
+import com.ru.mag.db.jdbc.queries.AgentQueries;
 import com.ru.mag.db.jdbc.util.DBUtil;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -27,7 +28,7 @@ public class MainController {
 //            ResultSet rs = DBUtil.getInstance().getAllProducts();
 
             FXMLLoader fxmlLoader =
-                    new FXMLLoader(getClass().getResource("TableDialog.fxml"));
+                    new FXMLLoader(getClass().getResource("../gui/TableDialog.fxml"));
             Parent tableParent = fxmlLoader.load();
 
             TableController tableController = fxmlLoader.getController();
@@ -48,7 +49,7 @@ public class MainController {
         try{
             ResultSet rs = DBUtil.getInstance().getAllPeopleCommand();
 
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("TableDialog.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../gui/TableDialog.fxml"));
             Parent tableParent = fxmlLoader.load();
 
             TableController tableController = fxmlLoader.getController();
@@ -67,10 +68,11 @@ public class MainController {
 
     public void showAllAgents(ActionEvent event) throws IOException {
         try{
+            AgentQueries agentRepo = new AgentQueries();
             //create a resultset getting the db instance command -> goto db util
-            ResultSet rs = DBUtil.getInstance().getAllAgentsCommand();
+            ResultSet rs = agentRepo.getAllAgentsCommand();
 
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("TableDialog.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../gui/TableDialog.fxml"));
             Parent tableParent = fxmlLoader.load();
 
             TableController tableController = fxmlLoader.getController();
@@ -90,7 +92,7 @@ public class MainController {
 
     public void openProperties(ActionEvent event) throws IOException {
         try{
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("PropertyDialog.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../gui/PropertyDialog.fxml"));
             Parent tableParent = fxmlLoader.load();
 
             PropertyController propertyController = fxmlLoader.getController();
@@ -107,7 +109,7 @@ public class MainController {
 
     public void openPropOwnerForm(ActionEvent event) throws IOException {
         try{
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("PropertyOwnerDialog.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../gui/PropertyOwnerDialog.fxml"));
             Parent tableParent = fxmlLoader.load();
 
             PropertyOwnerController propertyController = fxmlLoader.getController();
@@ -124,7 +126,7 @@ public class MainController {
 
     public void openClientsForm(ActionEvent event) throws IOException {
         try{
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ClientDialog.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../gui/ClientDialog.fxml"));
             Parent tableParent = fxmlLoader.load();
 
             ClientController clientController = fxmlLoader.getController();
@@ -141,11 +143,12 @@ public class MainController {
 
     public void showAgentById(ActionEvent event) throws IOException {
         try{
+            AgentQueries agentRepo = new AgentQueries();
             int agentId = Integer.parseInt(agentIdField.getText());
             //create a resultset getting the dbinstance command -> goto dbutil
-            ResultSet rs = DBUtil.getInstance().getAgentByIdCommand(agentId);
+            ResultSet rs = agentRepo.getAgentByIdCommand(agentId);
 
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("TableDialog.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../gui/TableDialog.fxml"));
             Parent tableParent = fxmlLoader.load();
 
             TableController tableController = fxmlLoader.getController();
@@ -164,7 +167,7 @@ public class MainController {
 
     public void openPersonForm(ActionEvent event) throws IOException {
         try{
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("PersonDialog.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../gui/PersonDialog.fxml"));
             Parent tableParent = fxmlLoader.load();
 
             Stage stage = new Stage();
@@ -193,9 +196,6 @@ public class MainController {
         }
     }
 
-    // -----------------------------
-    // SEARCH PRODUCT (example by ID)
-    // -----------------------------
     public void searchProduct(ActionEvent event) throws IOException {
         try {
             // Example: hardcoded ID for exercise simplicity
@@ -204,7 +204,7 @@ public class MainController {
 //            ResultSet rs = DBUtil.getInstance().getProductById(productId);
 
             FXMLLoader fxmlLoader =
-                    new FXMLLoader(getClass().getResource("TableDialog.fxml"));
+                    new FXMLLoader(getClass().getResource("../gui/TableDialog.fxml"));
             Parent tableParent = fxmlLoader.load();
 
             TableController tableController = fxmlLoader.getController();
@@ -220,49 +220,14 @@ public class MainController {
             showError(e.getMessage());
         }
     }
-
-    // -----------------------------
-    // SHOW MANUFACTURERS
-    // -----------------------------
-//    public void showManufacturers(ActionEvent event) throws IOException {
-//        try {
-//            ResultSet rs = DBUtil.getInstance().getAllManufacturers();
-//
-//            FXMLLoader fxmlLoader =
-//                    new FXMLLoader(getClass().getResource("TableDialog.fxml"));
-//            Parent tableParent = fxmlLoader.load();
-//
-//            TableController tableController = fxmlLoader.getController();
-//            tableController.setTableResultset(rs, "Manufacturers");
-//
-//            Stage stage = new Stage();
-//            stage.initModality(Modality.APPLICATION_MODAL);
-//            stage.setTitle("Manufacturers");
-//            stage.setScene(new Scene(tableParent));
-//            stage.show();
-//
-//        } catch (SQLException e) {
-//            showError(e.getMessage());
-//        }
-//    }
-
-    // -----------------------------
-    // EDIT PRODUCT (placeholder)
-    // -----------------------------
     public void editProduct(ActionEvent event) {
         showError("Edit product not implemented yet");
     }
 
-    // -----------------------------
-    // EDIT MANUFACTURER (placeholder)
-    // -----------------------------
     public void editManufacturer(ActionEvent event) {
         showError("Edit manufacturer not implemented yet");
     }
 
-    // -----------------------------
-    // COMMON ERROR DIALOG
-    // -----------------------------
     private void showError(String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");

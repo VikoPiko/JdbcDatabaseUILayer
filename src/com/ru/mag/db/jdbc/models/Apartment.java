@@ -5,6 +5,8 @@ public class Apartment {
     private int rooms;
     private int bathrooms;
 
+    public Apartment() {}
+
     public Apartment(int propertyId, int rooms, int bathrooms) {
         this.propertyId = propertyId;
         this.rooms = rooms;
