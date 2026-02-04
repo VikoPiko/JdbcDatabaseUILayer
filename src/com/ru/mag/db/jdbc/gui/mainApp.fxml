@@ -4,45 +4,55 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<!--<GridPane alignment="center" gridLinesVisible="true" hgap="10" prefHeight="350.0" prefWidth="350.0" vgap="10"-->
-<!--          xmlns="http://javafx.com/javafx/17.0.12"-->
-<!--          xmlns:fx="http://javafx.com/fxml/1"-->
-<!--          fx:controller="com.ru.mag.db.jdbc.controllers.MainController">-->
-<!--    <columnConstraints>-->
-<!--&lt;!&ndash;        <ColumnConstraints maxWidth="0.0" minWidth="0.0" prefWidth="0.0" />&ndash;&gt;-->
-<!--      <ColumnConstraints halignment="CENTER" maxWidth="117.0" minWidth="117.0" prefWidth="117.0" />-->
-<!--    </columnConstraints>-->
-<!--    <rowConstraints>-->
-<!--      <RowConstraints minHeight="10.0" prefHeight="40.0" />-->
-<!--        <RowConstraints prefHeight="40.0" />-->
-<!--        <RowConstraints prefHeight="40.0" />-->
-<!--        <RowConstraints prefHeight="40.0" />-->
-<!--        <RowConstraints prefHeight="40.0" />-->
-<!--        <RowConstraints prefHeight="40.0" />-->
-<!--      <RowConstraints prefHeight="40.0" />-->
-<!--    </rowConstraints>-->
-<!--    <children>-->
-<!--        <Button onAction="#openClientsForm" text="Open Clients Form" GridPane.columnIndex="1" GridPane.rowIndex="1" />-->
-<!--        <Button onAction="#openAgentForm" text="Open Agents Form" GridPane.columnIndex="1" GridPane.rowIndex="3" />-->
-<!--        <Button onAction="#showAllPeople" text="Get All People" GridPane.columnIndex="1" GridPane.rowIndex="4" />-->
-<!--&lt;!&ndash;        <Button text="Show manufacturers"&ndash;&gt;-->
-<!--&lt;!&ndash;                onAction="#showManufacturers"&ndash;&gt;-->
-<!--&lt;!&ndash;                GridPane.rowIndex="3"/>&ndash;&gt;-->
-<!--        <Button onAction="#openPersonForm" text="Open Person Form" GridPane.columnIndex="1" GridPane.rowIndex="6" />-->
-<!--      <Button mnemonicParsing="false" onAction="#showAllAgents" text="Get All Agents" GridPane.columnIndex="1" GridPane.rowIndex="5" />-->
-<!--    </children>-->
-<!--</GridPane>-->
-
-<VBox alignment="CENTER" spacing="15.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ru.mag.db.jdbc.controllers.MainController">
-    <Button onAction="#openClientsForm" text="Open Clients Form" />
-   <Button mnemonicParsing="false" onAction="#openProperties" text="Open Properties Form" />
-    <Button onAction="#openAgentForm" text="Open Agents Form" />
-    <Button onAction="#showAllPeople" text="Get All People" />
-    <Button onAction="#showAllAgents" text="Get All Agents" />
-    <Button onAction="#openPersonForm" text="Open Person Form" />
-   <Button mnemonicParsing="false" onAction="#openPropOwnerForm" text="Open PropertyOwner Form" />
-   <Button mnemonicParsing="false" text="Button" />
+<HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="12.0" stylesheets="@app.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ru.mag.db.jdbc.controllers.MainController">
    <padding>
-      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+      <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
    </padding>
-</VBox>
+   <children>
+      <HBox alignment="CENTER" prefHeight="350.0" prefWidth="510.0" spacing="10.0" styleClass="card" stylesheets="@app.css">
+         <children>
+            <VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="310.0" prefWidth="161.0" spacing="10.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#openAgentForm" text="Agent Form" />
+                  <Separator prefWidth="200.0" />
+                  <Button mnemonicParsing="false" onAction="#openApartmentForm" text="Apartment Form" />
+                  <Separator prefWidth="200.0" />
+                  <Button mnemonicParsing="false" onAction="#openClientsForm" text="Client Form" />
+                  <Separator prefWidth="200.0" />
+                  <Button mnemonicParsing="false" onAction="#openGarageForm" text="Garage Form" />
+                  <Separator prefWidth="200.0" />
+                  <Button mnemonicParsing="false" onAction="#openHouseForm" text="House Form" />
+                  <Separator prefWidth="200.0" />
+                  <Button mnemonicParsing="false" onAction="#openListingForm" text="Listing Form" />
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </VBox>
+            <Separator orientation="VERTICAL" prefHeight="200.0" />
+            <VBox alignment="TOP_CENTER" prefHeight="310.0" prefWidth="169.0" spacing="10.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#openPersonForm" text="Person Form" />
+                  <Separator prefWidth="200.0" />
+                  <Button mnemonicParsing="false" onAction="#openPreferencesForm" text="Preferences Form" />
+                  <Separator prefWidth="200.0" />
+                  <Button mnemonicParsing="false" onAction="#openProperties" text="Property Form" />
+                  <Separator prefWidth="200.0" />
+                  <Button mnemonicParsing="false" onAction="#openPropOwnerForm" text="Property Owner Form" />
+                  <Separator prefWidth="200.0" />
+                  <Button mnemonicParsing="false" onAction="#openPropImageForm" text="Property Image Form" />
+                  <Separator prefWidth="200.0" />
+                  <Button mnemonicParsing="false" onAction="#openRoles" text="Roles Form" />
+                  <Separator prefWidth="200.0" />
+                  <Button mnemonicParsing="false" onAction="#openSuccessfulDeals" text="Successful Deals Form" />
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </VBox>
+         </children>
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding></HBox>
+   </children>
+</HBox>

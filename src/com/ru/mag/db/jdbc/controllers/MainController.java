@@ -20,31 +20,6 @@ public class MainController {
     @FXML
     private TextField agentIdField;
 
-    // -----------------------------
-    // SHOW ALL PRODUCTS
-    // -----------------------------
-    public void showAllProducts(ActionEvent event) throws IOException {
-        try {
-//            ResultSet rs = DBUtil.getInstance().getAllProducts();
-
-            FXMLLoader fxmlLoader =
-                    new FXMLLoader(getClass().getResource("../gui/TableDialog.fxml"));
-            Parent tableParent = fxmlLoader.load();
-
-            TableController tableController = fxmlLoader.getController();
-//            tableController.setTableResultset(rs, "All products");
-
-            Stage stage = new Stage();
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.setTitle("Products");
-            stage.setScene(new Scene(tableParent));
-            stage.show();
-
-        } catch (Exception e) {
-            showError(e.getMessage());
-        }
-    }
-
     public void showAllPeople(ActionEvent event) throws IOException{
         try{
             ResultSet rs = DBUtil.getInstance().getAllPeopleCommand();
@@ -220,12 +195,124 @@ public class MainController {
             showError(e.getMessage());
         }
     }
-    public void editProduct(ActionEvent event) {
-        showError("Edit product not implemented yet");
+
+    public void openApartmentForm(ActionEvent event) throws IOException {
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../gui/ApartmentDialog.fxml"));
+            Parent tableParent = fxmlLoader.load();
+
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Apartment Management");
+            stage.setScene(new Scene(tableParent));
+            stage.show();
+        }catch(Exception e){
+            showError(e.getMessage());
+        }
+    }
+    public void openListingForm(ActionEvent event) throws IOException {
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../gui/ListingDialog.fxml"));
+            Parent tableParent = fxmlLoader.load();
+
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Apartment Management");
+            stage.setScene(new Scene(tableParent));
+            stage.show();
+        }catch(Exception e){
+            showError(e.getMessage());
+        }
     }
 
-    public void editManufacturer(ActionEvent event) {
-        showError("Edit manufacturer not implemented yet");
+    public void openHouseForm(ActionEvent event) throws IOException {
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../gui/HouseDialog.fxml"));
+            Parent tableParent = fxmlLoader.load();
+
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Apartment Management");
+            stage.setScene(new Scene(tableParent));
+            stage.show();
+        }catch(Exception e){
+            showError(e.getMessage());
+        }
+    }
+
+    public void openGarageForm(ActionEvent event) throws IOException {
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../gui/GarageDialog.fxml"));
+            Parent tableParent = fxmlLoader.load();
+
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Apartment Management");
+            stage.setScene(new Scene(tableParent));
+            stage.show();
+        }catch(Exception e){
+            showError(e.getMessage());
+        }
+    }
+
+    public void openPreferencesForm(ActionEvent event) throws IOException {
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../gui/PreferencesDialog.fxml"));
+            Parent tableParent = fxmlLoader.load();
+
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Apartment Management");
+            stage.setScene(new Scene(tableParent));
+            stage.show();
+        }catch(Exception e){
+            showError(e.getMessage());
+        }
+    }
+
+    public void openSuccessfulDeals(ActionEvent event) throws IOException {
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../gui/SuccessfulDealsDialog.fxml"));
+            Parent tableParent = fxmlLoader.load();
+
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Apartment Management");
+            stage.setScene(new Scene(tableParent));
+            stage.show();
+        }catch(Exception e){
+            showError(e.getMessage());
+        }
+    }
+
+    public void openPropImageForm(ActionEvent event) throws IOException {
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../gui/PropertyImageDialog.fxml"));
+            Parent tableParent = fxmlLoader.load();
+
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Apartment Management");
+            stage.setScene(new Scene(tableParent));
+            stage.show();
+        }catch(Exception e){
+            showError(e.getMessage());
+        }
+    }
+
+    public void openRoles(ActionEvent event) throws IOException {
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../gui/RolesDialog.fxml"));
+            Parent tableParent = fxmlLoader.load();
+
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Roles Management");
+            stage.setScene(new Scene(tableParent));
+            stage.show();
+        }catch(Exception e){
+            showError(e.getMessage());
+        }
     }
 
     private void showError(String message) {

@@ -7,6 +7,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -21,33 +23,59 @@ public class PropertyImageController {
     @FXML
     private TextField imageUrl;
 
+    @FXML private ImageView imagePreview;
+    private byte[] selectedImageBytes;
+
     private File selectedFile;
     PropertyImageQueries repo = new PropertyImageQueries();
 
-    public void chooseImage(){
+//    public void chooseImage(){
+//        FileChooser fc = new FileChooser();
+//        fc.getExtensionFilters().add(
+//                new FileChooser.ExtensionFilter("Images", "*.png", "*.jpg", "*.jpeg")
+//        );
+//        selectedFile = fc.showOpenDialog(null);
+//    }
+
+    @FXML
+    private void chooseImage() throws IOException {
         FileChooser fc = new FileChooser();
         fc.getExtensionFilters().add(
                 new FileChooser.ExtensionFilter("Images", "*.png", "*.jpg", "*.jpeg")
         );
-        selectedFile = fc.showOpenDialog(null);
+
+        File file = fc.showOpenDialog(null);
+        if (file != null) {
+            Image img = new Image(file.toURI().toString());
+            imagePreview.setImage(img);
+            selectedImageBytes = Files.readAllBytes(file.toPath());
+        }
     }
 
     public void uploadImage(){
         try{
-            if(selectedFile == null){
+            if(selectedImageBytes == null){
                 showError("Select image first");
                 return;
             }
 
-            byte[] data = Files.readAllBytes(selectedFile.toPath());
+            if(selectedImageBytes.length > 4_000_000){
+                showError("Image too large (max 4MB)");
+                return;
+            }
 
             repo.insertImage(
                     Integer.parseInt(listingId.getText()),
-                    data,
+                    selectedImageBytes,
                     imageUrl.getText()
             );
 
             showInfo("Image uploaded");
+
+            // optional reset
+            selectedImageBytes = null;
+            imagePreview.setImage(null);
+
         } catch(Exception e){
             showError(e.getMessage());
         }

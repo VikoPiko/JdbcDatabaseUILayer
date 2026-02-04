@@ -1,5 +1,6 @@
 package com.ru.mag.db.jdbc.controllers;
 
+import com.ru.mag.db.jdbc.queries.PropertyImageQueries;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -8,49 +9,82 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.util.Callback;
 
+import java.io.ByteArrayInputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class TableController {
 
     @FXML
-    TableView tableView1;
+    TableView<ObservableList<String>> tableView1;
 
     @FXML
     Label testLabel;
+    @FXML private ImageView imagePreview;
+
+    private final PropertyImageQueries imageRepo = new PropertyImageQueries();
 
     public void setTableResultset(ResultSet resultSet, String labelText) throws SQLException {
 
         testLabel.setText(labelText);
+        tableView1.getColumns().clear();
 
-        ObservableList<ObservableList> data = FXCollections.observableArrayList();
+        ObservableList<ObservableList<String>> data = FXCollections.observableArrayList();
+        int columnCount = resultSet.getMetaData().getColumnCount();
 
-        for (int i = 0; i < resultSet.getMetaData().getColumnCount(); i++) {
-
+        for (int i = 0; i < columnCount; i++) {
             final int j = i;
-            TableColumn col = new TableColumn(resultSet.getMetaData().getColumnName(i + 1));
-            col.setCellValueFactory((Callback<TableColumn.CellDataFeatures<ObservableList, String>, ObservableValue<String>>) param -> {
-                return new SimpleStringProperty(param.getValue().get(j).toString());
+            TableColumn<ObservableList<String>, String> col =
+                    new TableColumn<>(resultSet.getMetaData().getColumnName(i + 1));
+
+            col.setCellValueFactory(param -> {
+                String value = param.getValue().get(j);
+                return new SimpleStringProperty(value == null ? "" : value);
             });
 
             tableView1.getColumns().add(col);
         }
 
+        resultSet.beforeFirst();
+
         while (resultSet.next()) {
-            //Iterate Row
             ObservableList<String> row = FXCollections.observableArrayList();
-            for (int i = 1; i <= resultSet.getMetaData().getColumnCount(); i++) {
-                //Iterate Column
+            for (int i = 1; i <= columnCount; i++) {
                 row.add(resultSet.getString(i));
             }
             data.add(row);
-
         }
 
-        //FINALLY ADDED TO TableView
         tableView1.setItems(data);
+
+        if (labelText.toLowerCase().contains("image")) {
+            enableImagePreview();
+        }
+    }
+
+    private void enableImagePreview() {
+        tableView1.getSelectionModel().selectedItemProperty().addListener((obs, oldRow, newRow) -> {
+            if (newRow == null) return;
+
+            try {
+                int imageId = Integer.parseInt(newRow.get(0)); // first column = image_id
+                byte[] imgBytes = imageRepo.getImageDataById(imageId);
+
+                if (imgBytes != null) {
+                    Image img = new Image(new ByteArrayInputStream(imgBytes));
+                    imagePreview.setImage(img);
+                } else {
+                    imagePreview.setImage(null);
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
     }
 
 }

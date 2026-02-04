@@ -1,14 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.ru.mag.db.jdbc.controllers.HouseController"
-            prefHeight="400.0" prefWidth="600.0">
+<VBox alignment="TOP_CENTER" prefHeight="434.0" prefWidth="647.0" spacing="14" stylesheets="@app.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
 
-</AnchorPane>
+    <padding><Insets bottom="25" left="25" right="25" top="25" /></padding>
+
+    <VBox alignment="TOP_CENTER" spacing="12" styleClass="card">
+        <Label styleClass="label-title" text="House Management" />
+        <Separator />
+
+        <TextField fx:id="propertyId" promptText="Property ID" />
+        <TextField fx:id="floors" promptText="Number of Floors" />
+        <TextField fx:id="gardenSize" promptText="Garden Size (m²)" />
+        <TextField fx:id="bathrooms" promptText="Bathrooms" />
+        <TextField fx:id="rooms" promptText="Rooms" />
+
+        <Separator />
+        <HBox alignment="CENTER" spacing="12">
+            <Button styleClass="button-primary" text="Create" />
+            <Button styleClass="button-secondary" text="Update" />
+            <Button styleClass="button-danger" text="Delete" />
+        </HBox>
+
+        <Button styleClass="button-secondary" text="Show All" />
+    </VBox>
+</VBox>

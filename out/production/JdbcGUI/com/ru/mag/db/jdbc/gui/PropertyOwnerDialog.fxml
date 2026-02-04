@@ -4,9 +4,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="491.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ru.mag.db.jdbc.controllers.PropertyOwnerController">
+<AnchorPane prefHeight="400.0" prefWidth="491.0" stylesheets="@app.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ru.mag.db.jdbc.controllers.PropertyOwnerController">
    <children>
-      <Label layoutX="157.0" layoutY="14.0" text="Owner Overview">
+      <Label layoutX="183.0" layoutY="14.0" styleClass="label-title" text="Owner Overview">
          <font>
             <Font size="24.0" />
          </font>

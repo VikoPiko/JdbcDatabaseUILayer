@@ -1,17 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="491.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ru.mag.db.jdbc.controllers.PropertyOwnerController">
-   <children>
-      <Label layoutX="157.0" layoutY="14.0" text="Owner Overview">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Label>
-      <ComboBox fx:id="personSelector" layoutX="14.0" layoutY="113.0" prefHeight="25.0" prefWidth="168.0" promptText="Select Person" />
-      <Label layoutX="16.0" layoutY="94.0" text="ID | Person Name" />
-   </children>
-</AnchorPane>
+<VBox alignment="TOP_CENTER" prefHeight="434.0" prefWidth="624.0" spacing="14" stylesheets="@app.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ru.mag.db.jdbc.controllers.PropertyOwnerController">
+
+    <padding><Insets bottom="25" left="25" right="25" top="25" /></padding>
+
+    <VBox alignment="TOP_CENTER" prefHeight="378.0" prefWidth="574.0" spacing="12" styleClass="card">
+        <Label styleClass="label-title" text="Property Owners" />
+        <Separator />
+
+        <TextField fx:id="personId" promptText="Owner Person ID" />
+        <TextField fx:id="propertyId" promptText="Property ID" />
+
+        <Separator />
+        <HBox alignment="CENTER" spacing="12">
+            <Button styleClass="button-primary" text="Create" />
+            <Button styleClass="button-danger" text="Delete" />
+        </HBox>
+
+        <Button styleClass="button-secondary" text="Show All" />
+    </VBox>
+</VBox>

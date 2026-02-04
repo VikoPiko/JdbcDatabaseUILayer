@@ -23,7 +23,23 @@ public class PropertyImageQueries {
 
     public ResultSet getAllImages() throws SQLException {
         return DatabaseConnection.getConnection()
-                .prepareStatement(SELECT_ALL)
+                .prepareStatement(
+                        SELECT_ALL,
+                        ResultSet.TYPE_SCROLL_INSENSITIVE,
+                        ResultSet.CONCUR_READ_ONLY
+                )
                 .executeQuery();
+    }
+
+    public byte[] getImageDataById(int imageId) throws SQLException {
+        PreparedStatement ps = DatabaseConnection.getConnection()
+                .prepareStatement("SELECT image_data FROM Property_Images WHERE image_id = ?");
+        ps.setInt(1, imageId);
+
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            return rs.getBytes("image_data");
+        }
+        return null;
     }
 }

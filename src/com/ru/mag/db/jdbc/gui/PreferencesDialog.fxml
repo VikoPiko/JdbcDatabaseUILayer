@@ -1,14 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.ru.mag.db.jdbc.controllers.PreferencesController"
-            prefHeight="400.0" prefWidth="600.0">
+<VBox alignment="TOP_CENTER" prefHeight="402.0" prefWidth="627.0" spacing="14.0" stylesheets="@app.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
 
-</AnchorPane>
+    <padding><Insets bottom="25" left="25" right="25" top="25" /></padding>
+
+    <VBox alignment="TOP_CENTER" spacing="12" styleClass="card">
+        <Label styleClass="label-title" text="Preferences Management" />
+        <Separator />
+
+        <TextField fx:id="preferenceId" promptText="Preference ID" />
+        <TextField fx:id="clientId" promptText="Client ID" />
+        <TextField fx:id="preferenceType" promptText="Preference Type" />
+
+        <Separator />
+        <HBox alignment="CENTER" spacing="12">
+            <Button styleClass="button-primary" text="Create" />
+            <Button styleClass="button-secondary" text="Update" />
+            <Button styleClass="button-danger" text="Delete" />
+        </HBox>
+
+        <Button styleClass="button-secondary" text="Show All" />
+    </VBox>
+</VBox>
