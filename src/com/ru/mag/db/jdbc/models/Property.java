@@ -1,10 +1,12 @@
 package com.ru.mag.db.jdbc.models;
 
+import com.ru.mag.db.jdbc.controllers.ListingController;
+
 public class Property {
     private int id;
     private double price;
     private int squareMeters;
-    private String location;
+    private Location location;
     private String type;
     private int ownerId;
 
@@ -18,8 +20,16 @@ public class Property {
      * @param ownerId
      */
 
-    public Property(int id, double price, int squareMeters, String location, String type, int ownerId) {
+    public Property(int id, double price, int squareMeters, Location location, String type, int ownerId) {
         this.id = id;
+        this.price = price;
+        this.squareMeters = squareMeters;
+        this.location = location;
+        this.type = type;
+        this.ownerId = ownerId;
+    }
+
+    public Property(double price, int squareMeters, Location location, String type, int ownerId) {
         this.price = price;
         this.squareMeters = squareMeters;
         this.location = location;
@@ -55,11 +65,11 @@ public class Property {
         this.squareMeters = squareMeters;
     }
 
-    public String getLocation() {
+    public Location getLocation() {
         return location;
     }
 
-    public void setLocation(String location) {
+    public void setLocation(Location location) {
         this.location = location;
     }
 

@@ -1,5 +1,6 @@
 package com.ru.mag.db.jdbc.util;
 
+import com.ru.mag.db.jdbc.models.Location;
 import com.ru.mag.db.jdbc.models.Person;
 import oracle.jdbc.proxy.annotation.Pre;
 
@@ -333,19 +334,37 @@ public class DBUtil {
             "Insert into Property (price, square_meters, location, property_type, owner_id) " +
                     "values (?, ?, ?, ?, ?)";
 
-    public int insertProperty(Double price, double square_meters, String location, String property_type, int owner_id) throws SQLException {
-        try{
-            PreparedStatement statement = getConnection().prepareStatement(INSERT_PROPERTY_QUERY);
-            statement.setDouble(1, price);
-            statement.setDouble(2, square_meters); //
-            statement.setDouble(3, price);
-            statement.setDouble(4, price);
-            statement.setDouble(5, price);
+    public int insertProperty(Double price,
+                              double square_meters,
+                              Location location,
+                              String property_type,
+                              int owner_id) throws SQLException {
 
-            return statement.executeUpdate();
-        } catch(SQLException e){
-            e.printStackTrace();
-            return 0;
+        String sql = "INSERT INTO Property (price, square_meters, location, property_type, owner_id) " +
+                "VALUES (?, ?, ?, ?, ?)";
+
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setDouble(1, price);
+            ps.setDouble(2, square_meters);
+
+            // 👇 convert Location -> Oracle STRUCT
+            Object[] attrs = new Object[]{
+                    location.getLatitude(),
+                    location.getLongitude(),
+                    location.getCity()
+            };
+
+            Struct locationStruct = conn.createStruct("LOCATION_T", attrs);
+
+// 👇 THIS is the correct JDBC call
+            ps.setObject(3, locationStruct);
+
+            ps.setString(4, property_type);
+            ps.setInt(5, owner_id);
+
+            return ps.executeUpdate();
         }
     }
 

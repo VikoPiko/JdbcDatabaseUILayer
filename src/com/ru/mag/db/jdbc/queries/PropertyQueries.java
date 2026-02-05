@@ -3,9 +3,11 @@ package com.ru.mag.db.jdbc.queries;
 import com.ru.mag.db.jdbc.models.Property;
 import com.ru.mag.db.jdbc.util.DatabaseConnection;
 
+import javax.xml.crypto.Data;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Struct;
 
 public class PropertyQueries {
 
@@ -15,13 +17,25 @@ public class PropertyQueries {
     private static final String SELECT_ALL =
             "SELECT property_id, price, square_meters, property_type FROM Property";
 
+
+    private static final String Insert = "INSERT INTO Property(price, square_meters, property_type, owner_id, location) VALUES (?,?,?,?,?)";
     public int createProperty(Property p, int ownerId) throws SQLException {
         try{
-            PreparedStatement ps = DatabaseConnection.getConnection().prepareStatement(INSERT);
+            PreparedStatement ps = DatabaseConnection.getConnection().prepareStatement(Insert);
             ps.setDouble(1, p.getPrice());
             ps.setInt(2, p.getSquareMeters());
             ps.setString(3, p.getType());
             ps.setInt(4, ownerId);
+
+            Object[] attrs = {
+                    p.getLocation().getLatitude(),
+                    p.getLocation().getLongitude(),
+                    p.getLocation().getCity()
+            };
+
+            Struct locationStruct = DatabaseConnection.getConnection().createStruct("LOCATION_T", attrs);
+            ps.setObject(5, locationStruct);
+
             return ps.executeUpdate();
         } catch(SQLException e){
             e.printStackTrace();

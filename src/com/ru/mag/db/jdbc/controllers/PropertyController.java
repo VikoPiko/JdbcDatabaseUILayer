@@ -1,5 +1,6 @@
 package com.ru.mag.db.jdbc.controllers;
 
+import com.ru.mag.db.jdbc.models.Location;
 import com.ru.mag.db.jdbc.models.Property;
 import com.ru.mag.db.jdbc.queries.PropertyQueries;
 import com.ru.mag.db.jdbc.util.DBUtil;
@@ -25,6 +26,10 @@ public class PropertyController implements Initializable {
     @FXML private TextField squareMeters;
     @FXML private TextField propertyId;
     @FXML private TextField ownerId;
+
+    @FXML private TextField longitude;
+    @FXML private TextField latitude;
+    @FXML private TextField city;
 
     @FXML private ComboBox<String> propertyTypeSelect;
 
@@ -108,13 +113,15 @@ public class PropertyController implements Initializable {
                 return;
             }
 
+
+
             int property_id = Integer.parseInt(propertyId.getText());
             double priceVal = Double.parseDouble(price.getText());
             int sqm = Integer.parseInt(squareMeters.getText());
             int owner = Integer.parseInt(ownerId.getText());
-            String loc = location.getText();
+            Location locationVal = new Location("20", "00","2");
             String property_type = propertyTypeSelect.getValue();
-            Property prop = new Property(property_id, priceVal, sqm, loc, property_type, owner);
+            Property prop = new Property(property_id, priceVal, sqm, locationVal, property_type, owner);
 
             repo.updateProperty(prop, owner);
 
@@ -149,7 +156,14 @@ public class PropertyController implements Initializable {
             double priceVal = Double.parseDouble(price.getText());
             int sqm = Integer.parseInt(squareMeters.getText());
             int owner = Integer.parseInt(ownerId.getText());
-            String loc = location.getText();
+            Location loc = new Location(
+                    latitude.getText(),
+                    longitude.getText(),
+                    city.getText()
+            );
+
+            Property p = new Property(priceVal, sqm, loc, type, owner);
+            p.setLocation(loc);
 
             DBUtil.getInstance().insertProperty(
                     priceVal,
