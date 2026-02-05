@@ -17,11 +17,11 @@
 
         <Separator />
         <HBox alignment="CENTER" spacing="12">
-            <Button styleClass="button-primary" text="Create" />
+            <Button onAction="#assignOwner" styleClass="button-primary" text="Create" />
             <Button styleClass="button-danger" text="Delete" />
         </HBox>
 
-        <Button styleClass="button-secondary" text="Show All" />
+        <Button onAction="#getAllOwners" styleClass="button-secondary" text="Show All" />
       <Separator prefWidth="200.0" />
       <ComboBox fx:id="personSelector" prefHeight="41.0" prefWidth="239.0" promptText="Select Person" />
     </VBox>

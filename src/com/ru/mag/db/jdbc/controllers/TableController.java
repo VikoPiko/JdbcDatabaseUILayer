@@ -66,6 +66,27 @@ public class TableController {
         }
     }
 
+    public void setTableResultsetFromListWithHeaders(ObservableList<ObservableList<String>> data,
+                                                     ObservableList<String> columnNames,
+                                                     String labelText) {
+        testLabel.setText(labelText);
+        tableView1.getColumns().clear();
+
+        if (data.isEmpty()) {
+            tableView1.setItems(FXCollections.observableArrayList());
+            return;
+        }
+
+        for (int i = 0; i < columnNames.size(); i++) {
+            final int j = i;
+            TableColumn<ObservableList<String>, String> col = new TableColumn<>(columnNames.get(i));
+            col.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().get(j)));
+            tableView1.getColumns().add(col);
+        }
+
+        tableView1.setItems(data);
+    }
+
     private void enableImagePreview() {
         tableView1.getSelectionModel().selectedItemProperty().addListener((obs, oldRow, newRow) -> {
             if (newRow == null) return;

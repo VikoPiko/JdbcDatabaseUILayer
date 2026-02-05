@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="476.0" prefWidth="682.0" spacing="12.0" stylesheets="@app.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="476.0" prefWidth="682.0" spacing="12.0" stylesheets="@app.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ru.mag.db.jdbc.controllers.RolesController">
    <padding>
       <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
    </padding>
@@ -20,11 +20,11 @@
 
         <Separator />
         <HBox alignment="CENTER" spacing="12">
-            <Button styleClass="button-primary" text="Create" />
-            <Button styleClass="button-secondary" text="Update" />
-            <Button styleClass="button-danger" text="Delete" />
+            <Button styleClass="button-primary" text="Create" onAction="#createRole"/>
+            <Button styleClass="button-secondary" text="Update"/>
+            <Button styleClass="button-danger" text="Delete" onAction="#deleteRole"/>
         </HBox>
 
-        <Button styleClass="button-secondary" text="Show All" />
+        <Button styleClass="button-secondary" text="Show All" onAction="#getAllRoles"/>
     </VBox>
 </VBox>
