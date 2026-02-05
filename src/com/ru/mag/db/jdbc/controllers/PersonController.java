@@ -1,9 +1,15 @@
 package com.ru.mag.db.jdbc.controllers;
 
+import com.ru.mag.db.jdbc.queries.PersonQueries;
 import com.ru.mag.db.jdbc.util.DBUtil;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,6 +23,8 @@ public class PersonController {
     @FXML private TextField personId;
 
     private Integer currentPersonId;
+
+    PersonQueries repo = new PersonQueries();
 
     public void handleLoadPerson() {
         try {
@@ -40,6 +48,30 @@ public class PersonController {
             showError(e.getMessage());
         }
     }
+
+    public void getAll(){
+        try{
+            ResultSet rs = repo.getALlPeople();
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/TableDialog.fxml"));
+            Parent tableParent = loader.load();
+
+            TableController tableController = loader.getController();
+            tableController.setTableResultset(rs, "All People");
+
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("People");
+            stage.setScene(new Scene(tableParent));
+            stage.show();
+
+
+        } catch(Exception e){
+            showError(e.getMessage());
+        }
+    }
+
+
 
     public void handleCreate() {
         try {

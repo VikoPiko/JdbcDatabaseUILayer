@@ -20,6 +20,17 @@ public class GarageQueries {
         return ps.executeUpdate();
     }
 
+    public int deleteGarage(int propertyId) throws SQLException {
+        try{
+            PreparedStatement ps = DatabaseConnection.getConnection().prepareStatement("DELETE FROM Garage where property_id = ?");
+            ps.setInt(1, propertyId);
+            return ps.executeUpdate();
+        } catch(SQLException e){
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
     public ResultSet getAllGarages() throws SQLException {
         return DatabaseConnection.getConnection()
                 .prepareStatement(SELECT_ALL)

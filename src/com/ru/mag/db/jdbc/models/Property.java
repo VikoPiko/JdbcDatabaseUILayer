@@ -27,6 +27,10 @@ public class Property {
         this.ownerId = ownerId;
     }
 
+    public Property(int id){
+        this.id = id;
+    }
+
     public int getId() {
         return id;
     }

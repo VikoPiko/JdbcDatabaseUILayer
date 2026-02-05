@@ -49,7 +49,7 @@ public class TableController {
             tableView1.getColumns().add(col);
         }
 
-        resultSet.beforeFirst();
+//        resultSet.beforeFirst();
 
         while (resultSet.next()) {
             ObservableList<String> row = FXCollections.observableArrayList();

@@ -87,7 +87,7 @@ public class MainController {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../gui/PropertyOwnerDialog.fxml"));
             Parent tableParent = fxmlLoader.load();
 
-            PropertyOwnerController propertyController = fxmlLoader.getController();
+            PropertyOwnerController propertyOwnerController = fxmlLoader.getController();
 
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);

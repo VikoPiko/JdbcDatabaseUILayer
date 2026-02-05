@@ -1,5 +1,7 @@
 package com.ru.mag.db.jdbc.controllers;
 
+import com.ru.mag.db.jdbc.models.Property;
+import com.ru.mag.db.jdbc.queries.PropertyQueries;
 import com.ru.mag.db.jdbc.util.DBUtil;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,6 +27,8 @@ public class PropertyController implements Initializable {
     @FXML private TextField ownerId;
 
     @FXML private ComboBox<String> propertyTypeSelect;
+
+    PropertyQueries repo = new PropertyQueries();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -61,7 +65,6 @@ public class PropertyController implements Initializable {
                 stage.setScene(new Scene(tableParent));
                 stage.show();
 
-
                 price.setText(rsOwnerProperties.getString("price"));
                 location.setText(rsOwnerProperties.getString("location"));
                 String property_type = rsOwnerProperties.getString("property_type");
@@ -72,6 +75,64 @@ public class PropertyController implements Initializable {
                 showError("Owner not found");
             }
         }catch(Exception e){
+            showError(e.getMessage());
+        }
+    }
+
+    @FXML
+    public void getPropertyById(){
+        try{
+            int id = Integer.parseInt(propertyId.getText());
+            ResultSet rs = repo.getPropertyById(id);
+
+            TableController tableController = new TableController();
+            Parent tableParent =  FXMLLoader.load(getClass().getResource("../gui/TableDialog.fxml"));
+
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Property");
+            stage.setScene(new Scene(tableParent));
+            stage.show();
+
+        } catch (Exception e){
+            showError(e.getMessage());
+        }
+    }
+
+    public void updateProperty(){
+        try{
+            String type = propertyTypeSelect.getValue();
+
+            if (type == null) {
+                showError("Select property type");
+                return;
+            }
+
+            int property_id = Integer.parseInt(propertyId.getText());
+            double priceVal = Double.parseDouble(price.getText());
+            int sqm = Integer.parseInt(squareMeters.getText());
+            int owner = Integer.parseInt(ownerId.getText());
+            String loc = location.getText();
+            String property_type = propertyTypeSelect.getValue();
+            Property prop = new Property(property_id, priceVal, sqm, loc, property_type, owner);
+
+            repo.updateProperty(prop, owner);
+
+        } catch(Exception e){
+            showError(e.getMessage());
+        }
+    }
+
+    public void deleteProperty(){
+        try{
+            if(propertyId == null || propertyId.getText().isEmpty()){
+                showError("Enter property ID first");
+            }
+            int property_id = Integer.parseInt(propertyId.getText());
+            Property prop = new Property(property_id);
+            repo.deleteProperty(prop);
+            showInfo("Property with ID: " + property_id + " Deleted");
+        } catch(Exception e){
             showError(e.getMessage());
         }
     }
@@ -99,7 +160,6 @@ public class PropertyController implements Initializable {
             );
 
             showInfo("Property created");
-
         } catch (Exception e) {
             showError(e.getMessage());
         }

@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<?import javafx.scene.image.ImageView?>
-<DialogPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="480.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ru.mag.db.jdbc.controllers.TableController">
+<DialogPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="384.0" prefWidth="649.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ru.mag.db.jdbc.controllers.TableController">
     <header>
       <AnchorPane minHeight="50.0" minWidth="0.0" prefHeight="80.0" prefWidth="320.0">
          <children>
-            <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="480.0">
+            <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="649.0">
                <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" prefWidth="480.0" text="Students list:" textAlignment="JUSTIFY" fx:id="testLabel">
+                  <Label fx:id="testLabel" alignment="CENTER" contentDisplay="CENTER" prefWidth="480.0" text="Students list:" textAlignment="JUSTIFY">
                      <font>
                         <Font size="22.0" />
                      </font>
@@ -23,14 +23,11 @@
     <content>
       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="480.0">
          <children>
-            <TableView layoutY="1.0" prefHeight="220.0" prefWidth="480.0" fx:id="tableView1">
+            <TableView fx:id="tableView1" layoutY="1.0" prefHeight="276.0" prefWidth="649.0">
               <columns>
               </columns>
             </TableView>
-             <ImageView fx:id="imagePreview"
-                        fitWidth="300"
-                        fitHeight="200"
-                        preserveRatio="true"/>
+             <ImageView fx:id="imagePreview" fitHeight="200" fitWidth="436.0" layoutX="2.0" preserveRatio="true" />
          </children></AnchorPane>
     </content>
 </DialogPane>
